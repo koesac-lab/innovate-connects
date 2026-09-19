@@ -1,0 +1,7 @@
+services:
+  website:
+    build: .
+    container_name: innovate-connects
+    restart: unless-stopped
+    ports:
+      - "8092:80"

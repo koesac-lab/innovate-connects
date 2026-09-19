@@ -1,0 +1,287 @@
+@layer components {
+  :root {
+    --gold-dark: #7c4e1e;
+    --gold-mid: #b87a2b;
+    --gold-warm: #d8a84d;
+    --gold-light: #f8dda0;
+    --gold-white: #fff1c7;
+    --ink-deep: #050a0c;
+  }
+
+  .hero::before,
+  .hero::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  .hero::before {
+    opacity: 0.52;
+    background:
+      radial-gradient(ellipse 75% 48% at 78% 54%, transparent 42%, rgb(0 0 0 / 42%) 100%),
+      linear-gradient(115deg, rgb(1 5 7 / 30%) 0%, transparent 40%, rgb(2 7 8 / 38%) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  .hero::after {
+    z-index: 1;
+    opacity: 0.1;
+    background-image: url("/assets/textures/grain-overlay.svg");
+    background-repeat: repeat;
+    background-size: 150px 150px;
+    mix-blend-mode: soft-light;
+  }
+
+  .hero__content {
+    z-index: 2;
+  }
+
+  .hero__readability {
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 54% 75% at 19% 55%, rgb(4 10 11 / 84%) 0%, rgb(4 10 11 / 61%) 54%, transparent 100%),
+      linear-gradient(90deg, rgb(3 8 10 / 74%) 0%, rgb(3 8 10 / 32%) 54%, transparent 100%),
+      linear-gradient(0deg, rgb(2 6 8 / 65%) 0%, transparent 37%);
+  }
+
+  .hero h1 {
+    color: #fff3d6;
+    text-shadow:
+      0 2px 0 rgb(0 0 0 / 14%),
+      0 12px 32px rgb(0 0 0 / 28%);
+  }
+
+  .hero h1 em {
+    display: inline-block;
+    color: var(--gold-light);
+    background: linear-gradient(
+      105deg,
+      var(--gold-dark) 0%,
+      var(--gold-warm) 18%,
+      var(--gold-white) 43%,
+      var(--gold-warm) 61%,
+      var(--gold-mid) 82%,
+      var(--gold-light) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 0.7rem rgb(229 185 94 / 12%));
+  }
+
+  .hero .eyebrow,
+  .eyebrow {
+    color: var(--gold-light);
+    text-shadow: 0 0 1.2rem rgb(215 165 67 / 14%);
+  }
+
+  .button {
+    position: relative;
+    overflow: hidden;
+    border-color: rgb(255 226 155 / 74%);
+    color: #191109;
+    background:
+      linear-gradient(105deg, #aa7027 0%, #ddae58 24%, #fff0bd 49%, #d7a04a 73%, #a96b22 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 54%),
+      inset 0 -1px 0 rgb(75 35 6 / 32%),
+      0 0.9rem 2.2rem rgb(0 0 0 / 23%),
+      0 0 1.8rem rgb(215 165 67 / 13%);
+  }
+
+  .button::before {
+    position: absolute;
+    inset: 1px;
+    content: "";
+    border-radius: inherit;
+    opacity: 0.35;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 58%), transparent 46%),
+      url("/assets/textures/grain-overlay.svg");
+    background-size: auto, 110px 110px;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  .button > * ,
+  .button {
+    isolation: isolate;
+  }
+
+  .button:hover {
+    border-color: var(--gold-white);
+    color: #120c06;
+    background:
+      linear-gradient(105deg, #bd8130 0%, #eabe68 28%, #fff7d5 51%, #dfae56 73%, #b77826 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 66%),
+      inset 0 -1px 0 rgb(75 35 6 / 30%),
+      0 1.1rem 2.6rem rgb(0 0 0 / 28%),
+      0 0 2.4rem rgb(240 199 108 / 22%);
+  }
+
+  .button--ghost {
+    border-color: rgb(239 208 128 / 46%);
+    color: var(--gold-light);
+    background: rgb(5 13 15 / 22%);
+    box-shadow: inset 0 1px 0 rgb(255 247 214 / 9%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .button--ghost:hover {
+    color: #1b1208;
+    background: linear-gradient(105deg, #bd8130, #f6d992 48%, #bd8130);
+  }
+
+  .surface,
+  .approach-card,
+  .insight-card {
+    border-color: rgb(236 202 125 / 18%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 245 210 / 7%),
+      inset 0 0 0 1px rgb(0 0 0 / 14%),
+      0 1.6rem 4rem rgb(0 0 0 / 31%);
+  }
+
+  .surface::before,
+  .approach-card::before,
+  .insight-card::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    content: "";
+    opacity: 0.075;
+    pointer-events: none;
+    background-image: url("/assets/textures/grain-overlay.svg");
+    background-repeat: repeat;
+    background-size: 140px 140px;
+    mix-blend-mode: soft-light;
+  }
+
+  .surface > *,
+  .approach-card > *,
+  .insight-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .approach-card {
+    background:
+      radial-gradient(circle at 94% 2%, rgb(12 132 133 / 23%), transparent 39%),
+      linear-gradient(145deg, #08282c 0%, #071315 78%);
+  }
+
+  .approach-card:nth-child(even) {
+    background:
+      radial-gradient(circle at 96% 0%, rgb(198 72 87 / 18%), transparent 43%),
+      linear-gradient(145deg, #431126 0%, #110b11 79%);
+  }
+
+  .approach-card::after {
+    position: absolute;
+    right: -23%;
+    bottom: -45%;
+    width: 88%;
+    aspect-ratio: 1;
+    content: "";
+    border: 1px solid rgb(237 197 105 / 24%);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 1.4rem rgb(237 197 105 / 6%),
+      0 0 0 3rem rgb(237 197 105 / 4%),
+      0 0 0 4.9rem rgb(237 197 105 / 2%);
+    pointer-events: none;
+  }
+
+  .approach-card__number,
+  .service-card > span {
+    color: var(--gold-light);
+  }
+
+  .approach-card h3,
+  .service-card h3,
+  .insight-card h3 {
+    color: #fff1d3;
+  }
+
+  .intro,
+  .insights {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro::after,
+  .insights::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    opacity: 0.06;
+    pointer-events: none;
+    background: url("/assets/textures/grain-overlay.svg") repeat;
+    background-size: 160px 160px;
+    mix-blend-mode: soft-light;
+  }
+
+  .intro > *,
+  .insights > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    content: "";
+    opacity: 0.11;
+    pointer-events: none;
+    background: url("/assets/textures/grain-overlay.svg") repeat;
+    background-size: 150px 150px;
+    mix-blend-mode: soft-light;
+  }
+
+  .contact__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-footer {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 88% 130%, rgb(87 21 48 / 32%), transparent 49%),
+      radial-gradient(ellipse at 45% 130%, rgb(0 96 99 / 24%), transparent 46%),
+      #070b0d;
+  }
+
+  .site-footer::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    opacity: 0.07;
+    pointer-events: none;
+    background: url("/assets/textures/grain-overlay.svg") repeat;
+    background-size: 160px 160px;
+    mix-blend-mode: soft-light;
+  }
+
+  .site-footer__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 760px) {
+    .hero::after {
+      opacity: 0.075;
+    }
+
+    .hero h1 em {
+      background-image: none;
+      -webkit-text-fill-color: currentColor;
+      filter: none;
+    }
+  }
+}

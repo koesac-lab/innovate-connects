@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img" viewBox="0 0 1600 1000">
+  <title id="title">Footer flow artwork</title>
+  <desc id="desc">Subtle dark teal, burgundy and gold flow artwork for footer and contact sections.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071113"/>
+      <stop offset=".56" stop-color="#0a1f22"/>
+      <stop offset="1" stop-color="#160d15"/>
+    </linearGradient>
+    <radialGradient cx="88%" cy="66%" id="teal" r="72%">
+      <stop offset="0" stop-color="#076d70" stop-opacity=".53"/>
+      <stop offset=".46" stop-color="#064a50" stop-opacity=".23"/>
+      <stop offset="1" stop-color="#071113" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="73%" cy="100%" id="wine" r="66%">
+      <stop offset="0" stop-color="#761b3b" stop-opacity=".57"/>
+      <stop offset=".5" stop-color="#461229" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#110c12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#9b6228" stop-opacity="0"/>
+      <stop offset=".24" stop-color="#d9a24a"/>
+      <stop offset=".51" stop-color="#ffe7a1"/>
+      <stop offset=".76" stop-color="#bd7d2e"/>
+      <stop offset="1" stop-color="#92591f" stop-opacity="0"/>
+    </linearGradient>
+    <filter height="160%" id="glow" width="160%" x="-30%" y="-30%">
+      <feGaussianBlur result="b" stdDeviation="1.6"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="grain">
+      <feTurbulence baseFrequency=".82" numOctaves="4" seed="57" stitchTiles="stitch" type="fractalNoise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA tableValues="0 .38" type="table"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect fill="url(#bg)" height="1000" width="1600"/>
+  <rect fill="url(#teal)" height="1000" width="1600"/>
+  <rect fill="url(#wine)" height="1000" width="1600"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M561 1085 C696 866 856 923 1015 758 C1197 567 1129 364 1337 260 C1508 175 1608 221 1747 290" opacity=".55" stroke="#0a474d" stroke-width="106"/>
+    <path d="M562 1085 C697 868 860 924 1021 764 C1204 576 1142 376 1346 273 C1513 189 1615 235 1753 303" opacity=".38" stroke="#096f72" stroke-width="43"/>
+    <path d="M592 1081 C727 874 880 918 1038 772 C1218 592 1159 392 1359 288 C1523 203 1623 248 1758 314" filter="url(#glow)" stroke="url(#gold)" stroke-width="3.1"/>
+    <path d="M620 1077 C753 878 898 911 1050 781 C1230 605 1173 405 1370 301 C1533 215 1632 261 1762 326" opacity=".76" stroke="#f1ca72" stroke-width=".86"/>
+    <path d="M-114 955 C152 783 307 894 514 753 C719 613 722 454 916 384 C1095 320 1180 370 1328 505" opacity=".43" stroke="#50142c" stroke-width="77"/>
+    <path d="M-94 944 C166 783 322 877 528 746 C730 607 735 467 927 398 C1099 336 1184 387 1324 516" opacity=".63" stroke="url(#gold)" stroke-width="2.1"/>
+  </g>
+  <g fill="none" opacity=".52" stroke="#e4b861" stroke-linecap="round">
+    <path d="M1038 772 C983 722 927 696 864 690"/>
+    <path d="M864 690 C813 657 772 623 723 571"/>
+    <path d="M864 690 C807 713 765 748 726 792"/>
+  </g>
+  <g fill="#edca73" filter="url(#glow)">
+    <circle cx="1038" cy="772" r="5.5"/>
+    <circle cx="864" cy="690" r="4.4"/>
+    <circle cx="723" cy="571" r="3.2"/>
+    <circle cx="726" cy="792" r="3.4"/>
+  </g>
+  <rect filter="url(#grain)" height="1000" opacity=".075" style="mix-blend-mode:soft-light" width="1600"/>
+</svg>
