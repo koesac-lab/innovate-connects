@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img" viewBox="0 0 1600 1000">
+  <title id="title">Workshop flow artwork</title>
+  <desc id="desc">Decorative burgundy, cream, teal and gold circular connectivity artwork for workshop and strategy panels.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#3e1024"/>
+      <stop offset=".5" stop-color="#621632"/>
+      <stop offset="1" stop-color="#101b1d"/>
+    </linearGradient>
+    <radialGradient cx="100%" cy="44%" id="cream" r="76%">
+      <stop offset="0" stop-color="#f3e7ce"/>
+      <stop offset=".52" stop-color="#e5d1a6"/>
+      <stop offset=".525" stop-color="#b47d34"/>
+      <stop offset=".54" stop-color="#0a2e32"/>
+      <stop offset="1" stop-color="#071518"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#9a6127"/>
+      <stop offset=".35" stop-color="#e0ae55"/>
+      <stop offset=".55" stop-color="#fff0b8"/>
+      <stop offset=".77" stop-color="#c08331"/>
+      <stop offset="1" stop-color="#8f5923"/>
+    </linearGradient>
+    <filter height="160%" id="glow" width="160%" x="-30%" y="-30%">
+      <feGaussianBlur result="b" stdDeviation="2"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="grain">
+      <feTurbulence baseFrequency=".74" numOctaves="4" seed="44" stitchTiles="stitch" type="fractalNoise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA tableValues="0 .36" type="table"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect fill="url(#bg)" height="1000" width="1600"/>
+  <circle cx="1478" cy="492" fill="url(#cream)" r="682"/>
+  <circle cx="1480" cy="492" fill="none" opacity=".82" r="504" stroke="#dfc18a" stroke-width="8"/>
+  <circle cx="1480" cy="492" fill="none" opacity=".83" r="455" stroke="#0e4b50" stroke-width="70"/>
+  <circle cx="1480" cy="492" fill="none" opacity=".9" r="393" stroke="#6f1838" stroke-width="90"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M604 1080 C764 852 898 908 993 702 C1098 476 1060 286 1233 121 C1367 -7 1521 -14 1736 69" opacity=".79" stroke="#072e33" stroke-width="133"/>
+    <path d="M606 1081 C769 855 906 909 1000 708 C1106 487 1074 299 1242 135 C1378 6 1530 -2 1741 78" opacity=".53" stroke="#0a7478" stroke-width="70"/>
+    <path d="M617 1082 C779 865 918 907 1013 716 C1123 509 1091 314 1255 151 C1388 20 1541 13 1748 88" filter="url(#glow)" stroke="url(#gold)" stroke-width="4.4"/>
+    <path d="M642 1083 C798 870 932 901 1028 724 C1136 523 1106 328 1268 166 C1399 34 1551 25 1754 99" opacity=".84" stroke="#f4d688" stroke-width="1.1"/>
+    <path d="M-110 853 C177 670 300 841 531 687 C747 543 768 343 973 256 C1142 184 1252 259 1414 419" opacity=".62" stroke="#6f1735" stroke-width="107"/>
+    <path d="M-110 853 C177 670 300 841 531 687 C747 543 768 343 973 256 C1142 184 1252 259 1414 419" opacity=".47" stroke="#a52a4a" stroke-width="52"/>
+    <path d="M-89 844 C190 678 313 824 545 677 C757 536 782 354 983 270 C1147 201 1255 276 1410 430" opacity=".84" stroke="url(#gold)" stroke-width="3.2"/>
+  </g>
+  <g fill="none" opacity=".7" stroke="#f1c873" stroke-linecap="round">
+    <path d="M983 270 C927 241 881 218 824 209"/>
+    <path d="M824 209 C782 169 737 148 679 144"/>
+    <path d="M824 209 C786 240 763 281 751 329"/>
+  </g>
+  <g fill="#f4d278" filter="url(#glow)">
+    <circle cx="983" cy="270" r="7"/>
+    <circle cx="824" cy="209" r="5.8"/>
+    <circle cx="679" cy="144" r="4"/>
+    <circle cx="751" cy="329" r="4.2"/>
+  </g>
+  <rect filter="url(#grain)" height="1000" opacity=".1" style="mix-blend-mode:soft-light" width="1600"/>
+</svg>
