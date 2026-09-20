@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Innovate Connects — layered "flow" art generator v4
-// v4: fabric-density ribbons. ~3x strands at hairline width with relative
-// path coordinates (gzip-friendly), dual sub-bundle moire weave, luminous
-// sheen on ribbon crests, shadow bands in the valleys.
+// Innovate Connects — layered "flow" art generator v5
+// v5: glance-level richness. v4's density averaged out at display size, so
+// this pass adds what the eye actually reads: crisp bright FEATURE strands
+// riding each crest, stronger valley shadows and sheen, weightier gold.
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -73,7 +73,6 @@ const sCurve = (t, { x0, y0, x1, y1, lift = 0.35, sag = 0.18 }) => {
   return [xt, mid + billow - lift * Math.sin(t * Math.PI) * (y0 - y1) * 0.25];
 };
 
-// strands stay close-parallel (fabric) by default; noiseShift splits sub-bundles
 const traceStrand = (noise, cfg, bandOffset, rng, noiseShift = 0) => {
   const pts = [];
   const n = cfg.segmentCount ?? 90;
@@ -89,7 +88,6 @@ const traceStrand = (noise, cfg, bandOffset, rng, noiseShift = 0) => {
   return pts;
 };
 
-// relative coords: x-steps are constant per strand, so this gzips hard
 const pathRel = (pts) => {
   let d = `M${pts[0][0]},${pts[0][1]}`;
   for (let i = 1; i < pts.length; i++) {
@@ -98,7 +96,7 @@ const pathRel = (pts) => {
   return d;
 };
 
-// ---------- ribbon sheets: dual-bundle moire, sheen, shadows ----------
+// ---------- ribbon sheets: fabric + moire + FEATURE strands + light/shadow ----------
 function ribbonSheet(rng, noise, sheet, uid) {
   const gid = `sheet-${uid}`;
   const grad =
@@ -110,11 +108,12 @@ function ribbonSheet(rng, noise, sheet, uid) {
   const half = sheet.thickness * 0.5;
   const paths = [];
 
+  const falloff = (bandOffset) => Math.exp(-2.1 * Math.pow(bandOffset / (half * 1.4), 2));
+
   const emit = (bandOffset, frayed, noiseShift) => {
     const pts = traceStrand(noise, sheet, bandOffset, rng, noiseShift);
-    const centreFalloff = Math.exp(-2.1 * Math.pow(bandOffset / (half * 1.4), 2));
     const opacity = q(Math.max(0.02, Math.min(0.22,
-      sheet.opacity * centreFalloff * (frayed ? 0.6 : 1) * (0.7 + rng() * 0.6))));
+      sheet.opacity * falloff(bandOffset) * (frayed ? 0.6 : 1) * (0.7 + rng() * 0.6))));
     const w = q(0.3 + rng() * 0.45);
     let stroke;
     const roll = rng();
@@ -124,7 +123,6 @@ function ribbonSheet(rng, noise, sheet, uid) {
     paths.push(`<path d="${pathRel(pts)}" stroke="${stroke}" stroke-opacity="${opacity}" stroke-width="${w}"/>`);
   };
 
-  // two interleaved sub-bundles with shifted noise phases = woven moire shimmer
   for (let s = 0; s < sheet.strands; s++) {
     emit(gauss(rng) * half * 0.62, false, (s % 2) * 37.3);
   }
@@ -134,17 +132,27 @@ function ribbonSheet(rng, noise, sheet, uid) {
     emit(side * half * (1.05 + rng() * 0.85), true, (s % 2) * 37.3);
   }
 
+  // FEATURE strands: crisp, bright, 2-3x wider — the threads the eye locks onto.
+  // Emitted last so they sit on top of the fabric within each sheet.
+  const featN = sheet.features ?? 16;
+  for (let s = 0; s < featN; s++) {
+    const bandOffset = gauss(rng) * half * 0.5;
+    const pts = traceStrand(noise, sheet, bandOffset, rng, (s % 2) * 37.3);
+    const opacity = q(Math.min(0.55, sheet.opacity * 3.4 * falloff(bandOffset) * (0.75 + rng() * 0.5)));
+    const w = q(1.4 + rng() * 1.3);
+    const stroke = rng() < 0.45 ? sheet.accent : lerpHex(sheet.to, sheet.accent, 0.55);
+    paths.push(`<path d="${pathRel(pts)}" stroke="${stroke}" stroke-opacity="${opacity}" stroke-width="${w}"/>`);
+  }
+
   const wash = `<path d="${pathRel(traceStrand(noise, sheet, 0, rng))}" stroke="${sheet.from}" stroke-opacity="0.09" stroke-width="${q(sheet.thickness * 1.6)}" stroke-linecap="round"/>`;
-  // shadow band: wide soft dark stroke hugging the sheet's lower valley
-  const shadow = `<path d="${pathRel(traceStrand(noise, sheet, half * 0.9, rng))}" stroke="${darken(sheet.from, 0.55)}" stroke-opacity="0.09" stroke-width="${q(sheet.thickness * 2.1)}" stroke-linecap="round"/>`;
+  const shadow = `<path d="${pathRel(traceStrand(noise, sheet, half * 0.9, rng))}" stroke="${darken(sheet.from, 0.55)}" stroke-opacity="0.13" stroke-width="${q(sheet.thickness * 2.3)}" stroke-linecap="round"/>`;
   const blur = sheet.blur ? ` filter="url(#blur${sheet.blur})"` : "";
   const body =
     `<g id="g-${uid}" fill="none" stroke-linecap="round"${blur}` +
     (sheet.drift ? ` class="drift drift-${uid}"` : "") +
     `>\n${paths.join("\n")}\n</g>`;
   const halo = `<use href="#g-${uid}" filter="url(#blur6)" opacity="0.30" transform="translate(3,4)"/>`;
-  // luminous sheen ellipses riding the crest
-  const alpha = sheet.sheen ?? 0.45;
+  const alpha = sheet.sheen ?? 0.55;
   const crest = (t) => sCurve(t, sheet.guide);
   const [ax, ay] = crest(0.36), [bx, by] = crest(0.66);
   const W = sheet._W, ry = sheet.thickness * 0.55;
@@ -163,8 +171,8 @@ function goldThreads(rng, noise, cfg, uid) {
   for (let i = 0; i < cfg.count; i++) {
     const offset = gauss(rng) * cfg.thickness * 0.5;
     const pts = traceStrand(noise, cfg, offset, rng);
-    const opacity = q(0.45 + rng() * 0.45);
-    const w = q(0.9 + rng() * 1.3);
+    const opacity = q(0.5 + rng() * 0.45);
+    const w = q(1.1 + rng() * 1.4);
     const stroke = rng() < 0.35 ? C.goldBright : C.gold;
     const dash = rng() < 0.25 ? ' stroke-dasharray="7 3"' : "";
     paths.push(`<path d="${pathRel(pts)}" stroke="${stroke}" stroke-opacity="${opacity}" stroke-width="${w}"${dash}/>`);
@@ -311,21 +319,21 @@ const base = (W, H) => ({
 const heroPreset = {
   name: "hero", ...base(1600, 900),
   sheets: [
-    { guide: wave(-80, 1050, 1720, 190), strands: 340, thickness: 330, from: C.crimDeep, to: C.crim, accent: C.crimHot, opacity: 0.10, wobbleJitter: 14, noiseAmp: 18, noiseScale: 0.0016, blur: 2, drift: "slow" },
-    { guide: wave(-80, 1150, 1720, 60),  strands: 400, thickness: 420, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.09, wobbleJitter: 14, noiseAmp: 18, noiseScale: 0.0016, blur: 2, drift: "slow" },
-    { guide: wave(200, 980, 1680, -60),  strands: 190, thickness: 150, from: C.tealDeep, to: C.tealBright, accent: C.tealBright, opacity: 0.09, wobbleJitter: 12, noiseAmp: 16, noiseScale: 0.002, drift: "slow" },
+    { guide: wave(-80, 1050, 1720, 190), strands: 340, thickness: 330, from: C.crimDeep, to: C.crim, accent: C.crimHot, opacity: 0.10, wobbleJitter: 14, noiseAmp: 18, noiseScale: 0.0016, blur: 2, drift: "slow", features: 18, sheen: 0.6 },
+    { guide: wave(-80, 1150, 1720, 60),  strands: 400, thickness: 420, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.09, wobbleJitter: 14, noiseAmp: 18, noiseScale: 0.0016, blur: 2, drift: "slow", features: 20, sheen: 0.6 },
+    { guide: wave(200, 980, 1680, -60),  strands: 190, thickness: 150, from: C.tealDeep, to: C.tealBright, accent: C.tealBright, opacity: 0.09, wobbleJitter: 12, noiseAmp: 16, noiseScale: 0.002, drift: "slow", features: 10, sheen: 0.5 },
   ],
   threads: [
-    { guide: wave(-60, 1080, 1700, 120), count: 15, thickness: 200, opacity: 1, wobbleJitter: 20, noiseAmp: 26, noiseScale: 0.0018 },
-    { guide: wave(250, 200, 1650, 980),  count: 9,  thickness: 130, opacity: 1, wobbleJitter: 14, noiseAmp: 20, noiseScale: 0.002 },
+    { guide: wave(-60, 1080, 1700, 120), count: 18, thickness: 200, opacity: 1, wobbleJitter: 20, noiseAmp: 26, noiseScale: 0.0018 },
+    { guide: wave(250, 200, 1650, 980),  count: 10, thickness: 130, opacity: 1, wobbleJitter: 14, noiseAmp: 20, noiseScale: 0.002 },
   ],
 };
 const reportPreset = {
   name: "report", ...base(1200, 1600),
   glows: [[0.7, 0.3, 0.3, "url(#glowT)"], [0.4, 0.55, 0.26, "url(#glowC)"]],
   sheets: [
-    { guide: wave(-80, 1250, 1300, 300), strands: 280, thickness: 300, from: C.crimDeep, to: C.crim, accent: C.crimHot, opacity: 0.10, wobbleJitter: 12, noiseAmp: 17, noiseScale: 0.0018, blur: 2 },
-    { guide: wave(-80, 1350, 1300, 150), strands: 320, thickness: 380, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.09, wobbleJitter: 12, noiseAmp: 17, noiseScale: 0.0018 },
+    { guide: wave(-80, 1250, 1300, 300), strands: 280, thickness: 300, from: C.crimDeep, to: C.crim, accent: C.crimHot, opacity: 0.10, wobbleJitter: 12, noiseAmp: 17, noiseScale: 0.0018, blur: 2, features: 15, sheen: 0.55 },
+    { guide: wave(-80, 1350, 1300, 150), strands: 320, thickness: 380, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.09, wobbleJitter: 12, noiseAmp: 17, noiseScale: 0.0018, features: 17, sheen: 0.55 },
   ],
   threads: [
     { guide: wave(-60, 1280, 1280, 220), count: 13, thickness: 180, opacity: 1, wobbleJitter: 18, noiseAmp: 24, noiseScale: 0.002 },
@@ -337,8 +345,8 @@ const workshopPreset = {
   name: "workshop", ...base(1600, 700),
   glows: [[0.65, 0.5, 0.28, "url(#glowC)"], [0.85, 0.3, 0.2, "url(#glowT)"]],
   sheets: [
-    { guide: wave(-80, 800, 1720, 120), strands: 260, thickness: 260, from: C.crimDeep, to: C.crim, accent: C.crimHot, opacity: 0.09, wobbleJitter: 11, noiseAmp: 15, noiseScale: 0.0018, blur: 2 },
-    { guide: wave(-80, 880, 1720, -20), strands: 300, thickness: 320, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.09, wobbleJitter: 11, noiseAmp: 15, noiseScale: 0.0018 },
+    { guide: wave(-80, 800, 1720, 120), strands: 260, thickness: 260, from: C.crimDeep, to: C.crim, accent: C.crimHot, opacity: 0.09, wobbleJitter: 11, noiseAmp: 15, noiseScale: 0.0018, blur: 2, features: 13, sheen: 0.55 },
+    { guide: wave(-80, 880, 1720, -20), strands: 300, thickness: 320, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.09, wobbleJitter: 11, noiseAmp: 15, noiseScale: 0.0018, features: 15, sheen: 0.55 },
   ],
   threads: [
     { guide: wave(-60, 820, 1700, 60), count: 11, thickness: 150, opacity: 1, wobbleJitter: 16, noiseAmp: 20, noiseScale: 0.002 },
@@ -352,7 +360,7 @@ const footerPreset = {
   glyphCfg: { wifiCount: 1, sparkCount: 6 },
   nodes: { count: 18, linkRadius: 130 },
   sheets: [
-    { guide: wave(-80, 520, 1720, 40), strands: 220, thickness: 200, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.08, wobbleJitter: 10, noiseAmp: 13, noiseScale: 0.002, blur: 2, sheen: 0.3 },
+    { guide: wave(-80, 520, 1720, 40), strands: 220, thickness: 200, from: C.tealDeep, to: C.teal, accent: C.tealBright, opacity: 0.08, wobbleJitter: 10, noiseAmp: 13, noiseScale: 0.002, blur: 2, features: 10, sheen: 0.35 },
   ],
   threads: [
     { guide: wave(-60, 480, 1700, 0), count: 9, thickness: 110, opacity: 1, wobbleJitter: 12, noiseAmp: 16, noiseScale: 0.0022 },
