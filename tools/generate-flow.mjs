@@ -1,12 +1,7 @@
 #!/usr/bin/env node
-// Innovate Connects — layered "flow" art generator v2
-// Richer pass: depth blur, gaussian-density ribbons, flow-aligned gradients,
-// routed node network on gold threads, crossing gold bundles, ambient mottle.
-//
-// Usage:
-//   node tools/generate-flow.mjs            # renders the 4 committed art assets
-//   node tools/generate-flow.mjs --lab 1 9  # renders public/art-lab/variant-{1..9}.svg
-//   node tools/generate-flow.mjs --only hero,footer
+// Innovate Connects — layered "flow" art generator v3
+// v3: wifi glyphs are proper ~96deg fans; gold is bundled fibre (twin
+// filaments + occasional stitching) rather than smooth single strokes.
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -135,13 +130,13 @@ function ribbonSheet(rng, noise, sheet, uid) {
     `<g id="g-${uid}" fill="none" stroke-linecap="round"${blur}` +
     (sheet.drift ? ` class="drift drift-${uid}"` : "") +
     `>\n${paths.join("\n")}\n</g>`;
-  // depth halo: duplicate via <use> (no path data repeated), soft offset glow
   const halo = `<use href="#g-${uid}" filter="url(#blur6)" opacity="0.30" transform="translate(3,4)"/>`;
   return { grad, wash, body, halo };
 }
 
-// ---------- gold threads ----------
+// ---------- gold threads: bundled fibre, not smooth single strokes ----------
 function goldThreads(rng, noise, cfg, uid) {
+  const dark = lerpHex(C.gold, "#4A3410", 0.55);
   const paths = [];
   for (let i = 0; i < cfg.count; i++) {
     const offset = gauss(rng) * cfg.thickness * 0.5;
@@ -149,7 +144,13 @@ function goldThreads(rng, noise, cfg, uid) {
     const opacity = q(0.45 + rng() * 0.45);
     const w = q(0.9 + rng() * 1.3);
     const stroke = rng() < 0.35 ? C.goldBright : C.gold;
-    paths.push(`<path d="${pathFrom(pts)}" stroke="${stroke}" stroke-opacity="${opacity}" stroke-width="${w}"/>`);
+    const dash = rng() < 0.25 ? ' stroke-dasharray="7 3"' : "";
+    paths.push(`<path d="${pathFrom(pts)}" stroke="${stroke}" stroke-opacity="${opacity}" stroke-width="${w}"${dash}/>`);
+    // fibre twins: bright + dark offset filaments = twisted thread highlight/shadow
+    for (const [dy, so, sw, col] of [[-1.3, 0.55, 0.55, C.goldBright], [1.5, 0.4, 0.5, dark]]) {
+      const twin = pts.map(([px, py]) => [px, q(py + dy * (0.8 + rng() * 0.5))]);
+      paths.push(`<path d="${pathFrom(twin)}" stroke="${col}" stroke-opacity="${q(opacity * so)}" stroke-width="${q(w * sw)}"/>`);
+    }
   }
   return `<g id="gold-${uid}" fill="none" stroke-linecap="round">\n${paths.join("\n")}\n</g>`;
 }
@@ -171,7 +172,6 @@ function nodeNetwork(rng, threadPts, cfg) {
       .slice(0, 2);
     for (const o of near) links.push(`<line x1="${p[0]}" y1="${p[1]}" x2="${o[0]}" y2="${o[1]}"/>`);
   }
-  // two focal nodes: the pair of points furthest from the scene centroid
   const cx = uniq.reduce((s, p) => s + p[0], 0) / uniq.length;
   const cy = uniq.reduce((s, p) => s + p[1], 0) / uniq.length;
   const byDist = [...uniq].sort((a, b) => Math.hypot(b[0]-cx, b[1]-cy) - Math.hypot(a[0]-cx, a[1]-cy));
@@ -189,11 +189,17 @@ function nodeNetwork(rng, threadPts, cfg) {
 }
 
 // ---------- glyphs ----------
+const polarPt = (x, y, R, deg) =>
+  [q(x + R * Math.cos((deg * Math.PI) / 180)), q(y + R * Math.sin((deg * Math.PI) / 180))];
+
 function wifiGlyph(x, y, s, rot) {
-  const arcs = [0.35, 0.65, 0.95]
+  // classic wifi fan: arcs centred on the dot, 96deg span pointing up, tilted by rot
+  const arcs = [0.4, 0.7, 1.0]
     .map((r) => {
-      const R = q(s * r), o = q(s * 0.28);
-      return `<path d="M${q(x - R)},${q(y)} A${R},${R} 0 0 1 ${q(x + R)},${q(y)}" transform="rotate(${rot} ${x} ${y - o})" />`;
+      const R = q(s * r);
+      const [sx, sy] = polarPt(x, y, R, -90 + rot - 48);
+      const [ex, ey] = polarPt(x, y, R, -90 + rot + 48);
+      return `<path d="M${sx},${sy} A${R},${R} 0 0 1 ${ex},${ey}"/>`;
     })
     .join("");
   return `<g fill="none" stroke="${C.gold}" stroke-width="${q(s * 0.09)}" stroke-linecap="round" stroke-opacity="0.8">${arcs}<circle cx="${x}" cy="${q(y)}" r="${q(s * 0.07)}" fill="${C.goldBright}" stroke="none"/></g>`;
@@ -202,7 +208,7 @@ function wifiGlyph(x, y, s, rot) {
 function glyphs(rng, cfg, W, H) {
   const out = [];
   for (let i = 0; i < cfg.wifiCount; i++) {
-    out.push(wifiGlyph(q(W * (0.55 + rng() * 0.4)), q(H * (0.15 + rng() * 0.5)), q(34 + rng() * 30), q(-15 - rng() * 20)));
+    out.push(wifiGlyph(q(W * (0.55 + rng() * 0.4)), q(H * (0.15 + rng() * 0.5)), q(34 + rng() * 30), q(-10 - rng() * 25)));
   }
   for (let i = 0; i < cfg.sparkCount; i++) {
     const x = q(W * (0.3 + rng() * 0.65)), y = q(H * (0.1 + rng() * 0.7)), s = q(3 + rng() * 5);
