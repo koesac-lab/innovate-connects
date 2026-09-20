@@ -1,7 +1,2 @@
-services:
-  website:
-    build: .
-    container_name: innovate-connects
-    restart: unless-stopped
-    ports:
-      - "8092:80"
+# Deployment is handled by GitHub Pages from the public/ directory.
+# This file is retained as documentation only; no container is required.

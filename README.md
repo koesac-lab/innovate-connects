@@ -1,39 +1,18 @@
-# Innovate Connects — static starter
+# Innovate Connects
 
-A self-contained, Docker-deployable static landing page implementing the initial brand system and visual direction.
+Static prototype site for Innovate Connects.
 
-## Run locally
+## Deployment
 
-```bash
-docker compose up --build
-```
+The deployable site lives in `public/` and is intended to be published with GitHub Pages using **Settings → Pages → Deploy from a branch → main → /public**.
 
-Open `http://localhost:8080`.
+The site is fully static: no PHP runtime, Docker container, Nginx configuration or server-side directory scanning is required.
 
-## Deploy
+## Routes
 
-Copy this directory to the server and run:
-
-```bash
-docker compose up -d --build
-```
-
-Place it behind your existing Cloudflare/Tailscale/reverse-proxy setup as appropriate. Change `8080:80` in `docker-compose.yml` if port 8080 is already in use.
-
-## Project structure
-
-- `public/index.html` — composed homepage
-- `public/assets/css/` — tokens, header and hero styles
-- `public/assets/js/` — navigation behaviour
-- `public/assets/art/` — full hero artwork
-- `public/assets/brand/` — connectivity mark
-- `public/assets/icons/` — methodology icon strip
-- `public/assets/textures/` — tileable grain
-
-## Notes
-
-- All generated decorative SVGs are local and require no third-party requests.
-- The navigation links are placeholders; point them to real routes when these pages exist.
-- The mobile menu closes on navigation click and Escape.
-- For a multi-page static deployment, replace the SPA fallback in `nginx.conf` with `try_files $uri $uri =404;` once each page has its own HTML file.
-# innovate-connects
+- `public/index.html` — main site and content index
+- `public/art-lab.html` — art-lab prototype
+- `public/logo-ideas.html` — static logo tester / logo exploration page
+- `public/art-lab/` — nine SVG variants
+- `public/inspo/` — visual reference library
+- `public/assets/` — shared image, brand, CSS, JavaScript, icon and texture assets
