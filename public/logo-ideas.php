@@ -1,0 +1,422 @@
+<?php
+// logo-ideas.php
+// Standalone visual exploration of the iC logo concept.
+?>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iC Logo Ideas</title>
+<style>
+:root {
+  --teal: #062f3b;
+  --teal-deep: #031923;
+  --gold: #e0ad4f;
+  --ink: #071218;
+  --paper: #f5f1e8;
+  --lavender: #b9b5ff;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--teal-deep); }
+body {
+  margin: 0;
+  color: #f8faf8;
+  background:
+    radial-gradient(circle at 50% -20%, rgba(39, 102, 116, .25), transparent 44rem),
+    var(--teal-deep);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page {
+  width: min(1500px, 100%);
+  margin: auto;
+  padding: 48px 28px 76px;
+}
+
+header { margin-bottom: 42px; }
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2.3rem, 6vw, 6rem);
+  line-height: .9;
+  letter-spacing: -.075em;
+  font-weight: 300;
+}
+header p {
+  max-width: 740px;
+  margin: 0;
+  color: #a9bec2;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card {
+  position: relative;
+  min-height: 590px;
+  overflow: hidden;
+  border-radius: 26px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.13);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  isolation: isolate;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 88% 8%, rgba(255,255,255,.09), transparent 29%);
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: rgba(255,255,255,.7);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.specimen {
+  flex: 1;
+  min-height: 350px;
+  display: grid;
+  place-items: center;
+}
+
+.card-foot {
+  max-width: 650px;
+  padding-top: 17px;
+  border-top: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.76);
+  font-size: .91rem;
+  line-height: 1.55;
+}
+
+/* Shared logo construction */
+.logo {
+  --accent: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 46px);
+}
+
+.mark {
+  position: relative;
+  width: clamp(145px, 18vw, 235px);
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+}
+
+/* The vertical stroke is the body of the lowercase i. */
+.i-stem {
+  position: absolute;
+  left: 17%;
+  bottom: 8%;
+  width: 8%;
+  height: 57%;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* Deliberately removed: there is no conventional dot on the i. */
+.i-dot { display: none; }
+
+.c-shape {
+  position: absolute;
+  left: 25%;
+  top: 23%;
+  width: 65%;
+  height: 65%;
+  border: clamp(9px, 1.25vw, 16px) solid var(--accent);
+  border-right-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-4deg);
+}
+
+/* Wi-Fi signal is now the replacement for the i dot. */
+.wifi {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 49%;
+  height: 39%;
+}
+
+.wifi-arc {
+  position: absolute;
+  left: 50%;
+  border: clamp(6px, .92vw, 11px) solid var(--accent);
+  border-bottom: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%);
+}
+
+.wifi-arc.one { width: 100%; height: 76%; }
+.wifi-arc.two { width: 71%; height: 55%; top: 20%; }
+.wifi-arc.three { width: 42%; height: 34%; top: 41%; }
+.wifi-point {
+  position: absolute;
+  top: 84%;
+  left: 46%;
+  width: 9%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.wordmark {
+  line-height: .87;
+  letter-spacing: -.06em;
+  white-space: nowrap;
+  font-weight: 300;
+}
+.wordmark .line { display: block; font-size: clamp(2.25rem, 5.8vw, 6.4rem); }
+.wordmark .sub { margin-top: .2em; }
+
+/* Direction 01 — clean integration */
+.clean {
+  background: linear-gradient(135deg, #063846, #082c36);
+}
+.clean .wifi { transform: translateY(-2px); }
+
+/* Direction 02 — signal as a replacement dot, with no extra glow */
+.signal-dot {
+  background: #081a38;
+  --accent: #75e4eb;
+}
+.signal-dot .c-shape { border-radius: 46% 54% 56% 44%; }
+.signal-dot .wordmark {
+  font-family: "Courier New", monospace;
+  letter-spacing: -.07em;
+}
+.signal-dot .wordmark .line:first-child { font-weight: 700; font-size: clamp(2rem, 5vw, 5.7rem); }
+.signal-dot .wordmark .sub {
+  margin-top: .65em;
+  font-size: clamp(.95rem, 1.9vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: .08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* Direction 03 — torch glow only behind the Wi-Fi signal */
+.torch {
+  --accent: #b8b6ff;
+  background:
+    radial-gradient(ellipse 37% 31% at 31% 39%, rgba(190, 187, 255, .25), transparent 58%),
+    linear-gradient(145deg, #07070c, #111118 62%, #050509);
+}
+
+.torch .specimen { overflow: visible; }
+.torch .mark {
+  filter: drop-shadow(0 0 12px rgba(175, 171, 255, .28));
+}
+
+/*
+  The glow is intentionally attached to .torch-signal-glow, which occupies
+  only the signal area. It cannot illuminate the i stem or the C.
+*/
+.torch .wifi::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -43%;
+  top: -28%;
+  width: 185%;
+  height: 150%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 50% 88%, rgba(255,255,255,.95) 0 3%, rgba(195,193,255,.72) 10%, rgba(113,129,255,.32) 28%, rgba(103,213,255,.17) 43%, transparent 70%);
+  filter: blur(18px);
+  opacity: .95;
+  pointer-events: none;
+}
+
+.torch .wifi::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: -18%;
+  top: -8%;
+  width: 138%;
+  height: 116%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(214,213,255,.22), transparent 67%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.torch .wifi-arc,
+.torch .wifi-point {
+  filter: drop-shadow(0 0 8px rgba(193,191,255,.64));
+}
+.torch .i-stem,
+.torch .c-shape { filter: none; }
+.torch .wordmark .line:first-child { font-weight: 500; }
+.torch .wordmark .sub {
+  font-size: clamp(1rem, 2vw, 1.9rem);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* Direction 04 — stripped monogram */
+.monogram {
+  background: var(--paper);
+  color: var(--ink);
+}
+.monogram::after {
+  background: radial-gradient(circle at 90% 9%, rgba(224,173,79,.18), transparent 31%);
+}
+.monogram .logo { flex-direction: column; align-items: flex-start; gap: 18px; }
+.monogram .mark { width: clamp(180px, 23vw, 290px); }
+.monogram .wifi { display: none; }
+.monogram .c-shape { border-width: clamp(10px, 1.4vw, 18px); }
+.monogram .i-stem { background: var(--ink); }
+.monogram .wordmark .line:first-child {
+  font-size: clamp(5rem, 10vw, 10.5rem);
+  line-height: .72;
+  font-weight: 350;
+  letter-spacing: -.11em;
+}
+.monogram .wordmark .sub {
+  margin-top: 1.35em;
+  color: #86652c;
+  font-size: clamp(.8rem, 1.7vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.monogram .card-foot { border-color: rgba(7,18,24,.2); color: rgba(7,18,24,.72); }
+.monogram .card-head { color: rgba(7,18,24,.6); }
+
+/* Direction 05 — signal with a restrained glow on a teal field */
+.atmospheric {
+  --accent: #f0bd57;
+  background: #092e38;
+}
+.atmospheric .wifi::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -39%;
+  top: -22%;
+  width: 175%;
+  height: 145%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 88%, rgba(255,234,171,.5), rgba(85,213,241,.19) 38%, transparent 70%);
+  filter: blur(22px);
+  opacity: .76;
+}
+.atmospheric .wifi-arc,
+.atmospheric .wifi-point { filter: drop-shadow(0 0 7px rgba(255,211,112,.48)); }
+
+@media (max-width: 850px) {
+  .grid { grid-template-columns: 1fr; }
+  .card { min-height: 520px; }
+}
+
+@media (max-width: 520px) {
+  .page { padding: 34px 16px 58px; }
+  .card { min-height: 460px; padding: 22px; border-radius: 19px; }
+  .logo { gap: 14px; }
+  .mark { width: 118px; }
+  .wordmark .line { font-size: 2.45rem; }
+  .torch .wordmark .sub { font-size: .82rem; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <h1>iC logo ideas</h1>
+    <p>The dot on the lowercase i has been removed from every route and replaced by the Wi-Fi signal. The torch treatment is deliberately constrained to the area behind the signal curves: the vertical i stroke and the C remain unlit.</p>
+  </header>
+
+  <section class="grid">
+    <article class="card clean">
+      <div class="card-head"><span>01 / Integrated signal</span><span>Clean</span></div>
+      <div class="specimen">
+        <div class="logo">
+          <div class="mark">
+            <i class="i-stem"></i><i class="i-dot"></i><i class="c-shape"></i>
+            <div class="wifi"><i class="wifi-arc one"></i><i class="wifi-arc two"></i><i class="wifi-arc three"></i><i class="wifi-point"></i></div>
+          </div>
+          <div class="wordmark"><span class="line">innovate</span><span class="line sub">connects</span></div>
+        </div>
+      </div>
+      <div class="card-foot">The closest continuation of the original identity. The Wi-Fi signal now has a clear structural role rather than appearing as a separate decorative dot.</div>
+    </article>
+
+    <article class="card signal-dot">
+      <div class="card-head"><span>02 / Technical signal</span><span>Systems</span></div>
+      <div class="specimen">
+        <div class="logo">
+          <div class="mark">
+            <i class="i-stem"></i><i class="i-dot"></i><i class="c-shape"></i>
+            <div class="wifi"><i class="wifi-arc one"></i><i class="wifi-arc two"></i><i class="wifi-arc three"></i><i class="wifi-point"></i></div>
+          </div>
+          <div class="wordmark"><span class="line">iC / NETWORK</span><span class="line sub">Connected systems,<br>intelligently delivered</span></div>
+        </div>
+      </div>
+      <div class="card-foot">A sharper infrastructure expression, with the signal acting as the defining identifier of the i rather than a conventional punctuation point.</div>
+    </article>
+
+    <article class="card torch">
+      <div class="card-head"><span>03 / Torch signal</span><span>Glow behind signal only</span></div>
+      <div class="specimen">
+        <div class="logo">
+          <div class="mark">
+            <i class="i-stem"></i><i class="i-dot"></i><i class="c-shape"></i>
+            <div class="wifi"><i class="wifi-arc one"></i><i class="wifi-arc two"></i><i class="wifi-arc three"></i><i class="wifi-point"></i></div>
+          </div>
+          <div class="wordmark"><span class="line">iC</span><span class="line sub">Innovation connects</span></div>
+        </div>
+      </div>
+      <div class="card-foot">The attached torch-inspired treatment. The concentrated bloom sits behind the Wi-Fi curves at the top of the mark and is intentionally prevented from spreading onto the i or C.</div>
+    </article>
+
+    <article class="card monogram">
+      <div class="card-head"><span>04 / Monogram first</span><span>Minimal</span></div>
+      <div class="specimen">
+        <div class="logo">
+          <div class="mark"><i class="i-stem"></i><i class="i-dot"></i><i class="c-shape"></i></div>
+          <div class="wordmark"><span class="line">iC</span><span class="line sub">Innovation connects</span></div>
+        </div>
+      </div>
+      <div class="card-foot">A compact masterbrand route for favicons, social avatars, application icons, presentation marks and other small-scale uses.</div>
+    </article>
+
+    <article class="card atmospheric">
+      <div class="card-head"><span>05 / Atmospheric signal</span><span>Teal field</span></div>
+      <div class="specimen">
+        <div class="logo">
+          <div class="mark">
+            <i class="i-stem"></i><i class="i-dot"></i><i class="c-shape"></i>
+            <div class="wifi"><i class="wifi-arc one"></i><i class="wifi-arc two"></i><i class="wifi-arc three"></i><i class="wifi-point"></i></div>
+          </div>
+          <div class="wordmark"><span class="line">iC</span><span class="line sub">Innovation connects</span></div>
+        </div>
+      </div>
+      <div class="card-foot">A less dramatic alternative to the torch version: the glow creates atmosphere behind the signal while preserving the original teal-and-gold identity.</div>
+    </article>
+  </section>
+</main>
+</body>
+</html>
