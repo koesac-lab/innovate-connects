@@ -1,2 +1,6 @@
-# Deployment is handled by GitHub Pages from the public/ directory.
-# This file is retained as documentation only; no container is required.
+FROM nginx:1.27-alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY public/ /usr/share/nginx/html/
+
+EXPOSE 80
