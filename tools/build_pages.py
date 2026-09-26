@@ -91,6 +91,25 @@ def promote_concept_art():
     index.write_text(html, encoding="utf-8")
 
 
+def polish_brand_direction():
+    page = SITE / "concept-two" / "brand-direction.html"
+    html = page.read_text(encoding="utf-8")
+    if html.count("</head>") != 1:
+        raise SystemExit("Cannot locate Brand Direction head for style fix")
+    styles = """<style>
+    /* Keep the dark website mock-up legible within the light Applications section. */
+    .website-mock { color: var(--paper); }
+    .website-mock .eyebrow { color: var(--gold-light); }
+    /* Reserve real space for the Perspective 1 title and its footer. */
+    .report-cover { display: flex; flex-direction: column; min-height: 350px; }
+    .report-cover h3 { margin: auto 0 22px; }
+    .report-cover footer { position: static; bottom: auto; line-height: 1.45; }
+    @media (max-width: 760px) { .report-cover { min-height: 370px; } }
+  </style>
+"""
+    page.write_text(html.replace("</head>", styles + "</head>", 1), encoding="utf-8")
+
+
 def build():
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -100,6 +119,7 @@ def build():
     (SITE / ".nojekyll").touch()
     (SITE / "showcase.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=concept-two/"><title>Innovate Connects</title><a href="concept-two/">Visit the current concept</a></html>\n', encoding="utf-8")
     promote_concept_art()
+    polish_brand_direction()
     for page in SITE.rglob("*.html"):
         html = page.read_text(encoding="utf-8")
         html = re.sub(r"<base\b[^>]*href\s*=\s*['\"]/innovate-connects/['\"][^>]*>", "", html, flags=re.I)
