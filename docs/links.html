@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151c">
+  <title>Explore — Innovate Connects</title>
+  <meta name="description" content="Explore two Innovate Connects homepage concepts and the work behind them.">
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #10151c; color: #f4f4f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+    .wrap { max-width: 1120px; margin: auto; padding: clamp(24px, 6vw, 80px); }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .wordmark { color: #f4f4f0; text-decoration: none; font-weight: 750; letter-spacing: -.04em; font-size: 1.2rem; }
+    .eyebrow { color: #97e4c2; font-size: .76rem; text-transform: uppercase; letter-spacing: .17em; font-weight: 700; }
+    h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: .98; letter-spacing: -.065em; margin: 76px 0 22px; max-width: 850px; }
+    .intro { color: #adb9c3; font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.6; max-width: 660px; margin: 0 0 65px; }
+    h2 { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: #97e4c2; margin: 0 0 18px; }
+    section { margin: 0 0 58px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { display: flex; min-height: 235px; padding: 26px; flex-direction: column; justify-content: space-between; border: 1px solid #344350; border-radius: 16px; background: #19232d; color: #f4f4f0; text-decoration: none; transition: transform .2s, border-color .2s, background .2s; }
+    .card:hover, .card:focus-visible { transform: translateY(-3px); border-color: #97e4c2; background: #20313a; outline: none; }
+    .tag { font-size: .73rem; text-transform: uppercase; letter-spacing: .13em; color: #97e4c2; }
+    .name { display: block; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 650; line-height: 1.15; letter-spacing: -.035em; margin-top: 18px; }
+    .desc { display: block; font-size: .96rem; line-height: 1.45; color: #b6c1c8; margin-top: 8px; }
+    .arrow { font-size: 1.5rem; align-self: flex-end; }
+    footer { border-top: 1px solid #344350; color: #a8b5be; padding-top: 25px; font-size: .85rem; }
+    footer a { color: #d6f5e6; }
+    @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } .card { min-height: 190px; } h1 { margin-top: 60px; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header><a class="wordmark" href="./" aria-label="Innovate Connects home">Innovate Connects</a><span class="eyebrow">Explore the work</span></header>
+    <h1>Ideas worth exploring.</h1>
+    <p class="intro">Two homepage concepts, plus the visual and creative explorations behind Innovate Connects. Choose a direction below.</p>
+    <section aria-labelledby="homepages"><h2 id="homepages">Homepage concepts</h2><div class="grid">
+      <a class="card" href="showcase.html"><span><span class="tag">Concept 01</span><span class="name">Original showcase</span><span class="desc">The original published homepage, preserved as its own destination.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="concept-two/"><span><span class="tag">Concept 02</span><span class="name">Alternative homepage</span><span class="desc">The second homepage concept from the site’s public collection.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    </div></section>
+    <section aria-labelledby="more"><h2 id="more">Explore more</h2><div class="grid">
+      <a class="card" href="concept-two/brand-direction.html"><span><span class="tag">Direction</span><span class="name">Brand direction</span><span class="desc">A closer look at the brand direction.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="concept-two/logo-ideas.html"><span><span class="tag">Identity</span><span class="name">Logo ideas</span><span class="desc">Explore the logo concepts.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="concept-two/art-lab.html"><span><span class="tag">Creative lab</span><span class="name">Art Lab</span><span class="desc">Visual experiments and variations.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    </div></section>
+    <footer>Innovate Connects · <a href="https://github.com/koesac-lab/innovate-connects">Source on GitHub</a></footer>
+  </main>
+</body>
+</html>
