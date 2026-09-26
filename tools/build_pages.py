@@ -73,6 +73,24 @@ def check_site():
     print("Published HTML and CSS local references resolve.")
 
 
+def promote_concept_art():
+    art = SITE / "concept-two" / "assets" / "art"
+    for name in ("report-flow", "workshop-flow"):
+        source = ROOT / "docs" / "assets" / "art" / f"{name}.svg"
+        shutil.copy2(source, art / f"{name}-concept-one.svg")
+    index = SITE / "concept-two" / "index.html"
+    html = index.read_text(encoding="utf-8")
+    swaps = (
+        ('src="assets/art/report-flow.webp"', 'src="assets/art/report-flow-concept-one.svg"'),
+        ('class="art-object art-object--workshop" src="assets/art/workshop-flow.webp"', 'class="art-object art-object--workshop" src="assets/art/workshop-flow-concept-one.svg"'),
+    )
+    for before, after in swaps:
+        if html.count(before) != 1:
+            raise SystemExit(f"Expected exactly one concept-two image reference: {before}")
+        html = html.replace(before, after, 1)
+    index.write_text(html, encoding="utf-8")
+
+
 def build():
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -85,6 +103,7 @@ def build():
     hero = SITE / "assets" / "art" / "hero-flow.svg"
     if not hero.exists():
         shutil.copy2(ROOT / "public" / "assets" / "art" / "hero-flow.svg", hero)
+    promote_concept_art()
     for page in SITE.rglob("*.html"):
         html = page.read_text(encoding="utf-8")
         html = re.sub(r"<base\b[^>]*href\s*=\s*['\"]/innovate-connects/['\"][^>]*>", "", html, flags=re.I)
