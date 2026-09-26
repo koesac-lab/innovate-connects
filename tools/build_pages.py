@@ -94,15 +94,11 @@ def promote_concept_art():
 def build():
     if SITE.exists():
         shutil.rmtree(SITE)
-    shutil.copytree(ROOT / "docs", SITE)
-    (SITE / "index.html").rename(SITE / "showcase.html")
+    SITE.mkdir()
     shutil.copytree(ROOT / "public", SITE / "concept-two")
     shutil.copy2(ROOT / "docs" / "links.html", SITE / "index.html")
-    (SITE / "links.html").unlink()
     (SITE / ".nojekyll").touch()
-    hero = SITE / "assets" / "art" / "hero-flow.svg"
-    if not hero.exists():
-        shutil.copy2(ROOT / "public" / "assets" / "art" / "hero-flow.svg", hero)
+    (SITE / "showcase.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=concept-two/"><title>Innovate Connects</title><a href="concept-two/">Visit the current concept</a></html>\n', encoding="utf-8")
     promote_concept_art()
     for page in SITE.rglob("*.html"):
         html = page.read_text(encoding="utf-8")
@@ -114,7 +110,7 @@ def build():
         css = stylesheet.read_text(encoding="utf-8")
         css = re.sub(r"(?<=[\"'(])/assets/", "../", css)
         stylesheet.write_text(css, encoding="utf-8")
-    for name in ("index.html", "showcase.html", "concept-two/index.html", "concept-two/brand-direction.html", "concept-two/logo-ideas.html", "concept-two/art-lab.html"):
+    for name in ("index.html", "concept-two/index.html", "concept-two/brand-direction.html", "concept-two/logo-ideas.html", "concept-two/art-lab.html"):
         if not (SITE / name).is_file():
             raise SystemExit(f"Missing published page: {name}")
     check_site()
