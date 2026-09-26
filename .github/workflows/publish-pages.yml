@@ -6,6 +6,7 @@ on:
     paths:
       - 'docs/**'
       - 'public/**'
+      - 'tools/build_pages.py'
       - '.github/workflows/publish-pages.yml'
   workflow_dispatch:
 
@@ -17,12 +18,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check linked pages
-        run: |
-          set -eu
-          test -s docs/index.html
-          test -s docs/links.html
-          test -s public/index.html
-          test -s public/brand-direction.html
-          test -s public/logo-ideas.html
-          test -s public/art-lab.html
+      - name: Assemble and check local assets and links
+        run: python3 tools/build_pages.py

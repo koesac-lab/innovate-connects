@@ -24,22 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Assemble site
-        run: |
-          set -eu
-          mkdir -p _site/concept-two
-          cp -a docs/. _site/
-          mv _site/index.html _site/showcase.html
-          cp -a public/. _site/concept-two/
-          cp docs/links.html _site/index.html
-          rm _site/links.html
-          touch _site/.nojekyll
-          test -s _site/index.html
-          test -s _site/showcase.html
-          test -s _site/concept-two/index.html
-          test -s _site/concept-two/brand-direction.html
-          test -s _site/concept-two/logo-ideas.html
-          test -s _site/concept-two/art-lab.html
+      - name: Assemble and validate site
+        run: python3 tools/build_pages.py
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
