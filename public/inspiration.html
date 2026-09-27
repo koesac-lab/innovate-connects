@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151c">
+  <meta name="description" content="A gallery of visual references behind Innovate Connects.">
+  <title>Inspiration gallery — Innovate Connects</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #10151c; color: #f4f4f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button { font: inherit; }
+    .wrap { max-width: 1200px; margin: auto; padding: clamp(24px, 6vw, 80px); }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .wordmark { color: #f4f4f0; text-decoration: none; font-size: 1.2rem; font-weight: 750; letter-spacing: -.04em; }
+    .back { color: #97e4c2; text-decoration: none; font-size: .9rem; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #97e4c2; outline-offset: 4px; }
+    h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: .98; letter-spacing: -.065em; margin: 76px 0 22px; }
+    .intro { color: #adb9c3; font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.6; max-width: 660px; margin: 0 0 50px; }
+    .gallery { columns: 3 260px; column-gap: 18px; }
+    .tile { display: block; break-inside: avoid; margin: 0 0 18px; padding: 10px; border: 1px solid #344350; border-radius: 14px; background: #19232d; color: #dce9e7; text-decoration: none; transition: border-color .2s, transform .2s; }
+    .tile:hover, .tile:focus-visible { border-color: #97e4c2; transform: translateY(-3px); }
+    .tile img { display: block; width: 100%; height: auto; border-radius: 7px; background: #10151c; }
+    .tile span { display: block; padding: 12px 4px 4px; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+    dialog { border: 0; padding: 0; width: min(1100px, 100vw); max-width: none; max-height: none; background: #10151c; color: #f4f4f0; box-shadow: 0 24px 90px #000a; }
+    dialog::backdrop { background: #050a10ed; }
+    dialog[open] { display: flex; flex-direction: column; height: min(94dvh, 900px); }
+    .lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 14px 20px; border-bottom: 1px solid #344350; }
+    .lightbox-bar p { margin: 0; color: #b6c1c8; font-size: .9rem; }
+    .controls { display: flex; gap: 8px; }
+    .controls button { min-width: 44px; min-height: 44px; border: 1px solid #344350; border-radius: 8px; background: #19232d; color: #f4f4f0; cursor: pointer; }
+    .controls button:hover { border-color: #97e4c2; }
+    .viewer { display: flex; align-items: center; justify-content: center; flex: 1; min-height: 0; padding: 12px; }
+    .viewer img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+    @media (max-width: 650px) { h1 { margin-top: 60px; } .lightbox-bar { padding: 10px; } dialog[open] { width: 100vw; height: 100dvh; } }
+    @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header><a class="wordmark" href="./">Innovate Connects</a><a class="back" href="./">← Back to site</a></header>
+    <h1>Inspiration gallery.</h1>
+    <p class="intro">Visual references gathered while exploring the Innovate Connects direction. Select an image to see it in full.</p>
+    <div class="gallery" id="gallery" aria-label="Inspiration images">
+      <a class="tile" href="inspo/IMG_0109.JPEG"><img src="inspo/IMG_0109.JPEG" alt="Inspiration reference 01" loading="lazy"><span>Reference 01</span></a>
+      <a class="tile" href="inspo/IMG_0112.JPEG"><img src="inspo/IMG_0112.JPEG" alt="Inspiration reference 02" loading="lazy"><span>Reference 02</span></a>
+      <a class="tile" href="inspo/IMG_0115.JPEG"><img src="inspo/IMG_0115.JPEG" alt="Inspiration reference 03" loading="lazy"><span>Reference 03</span></a>
+      <a class="tile" href="inspo/IMG_0116.JPEG"><img src="inspo/IMG_0116.JPEG" alt="Inspiration reference 04" loading="lazy"><span>Reference 04</span></a>
+      <a class="tile" href="inspo/IMG_0117.JPEG"><img src="inspo/IMG_0117.JPEG" alt="Inspiration reference 05" loading="lazy"><span>Reference 05</span></a>
+      <a class="tile" href="inspo/IMG_0118.JPEG"><img src="inspo/IMG_0118.JPEG" alt="Inspiration reference 06" loading="lazy"><span>Reference 06</span></a>
+      <a class="tile" href="inspo/IMG_0119.JPEG"><img src="inspo/IMG_0119.JPEG" alt="Inspiration reference 07" loading="lazy"><span>Reference 07</span></a>
+      <a class="tile" href="inspo/IMG_0363.PNG"><img src="inspo/IMG_0363.PNG" alt="Inspiration reference 08" loading="lazy"><span>Reference 08</span></a>
+      <a class="tile" href="inspo/concept.png"><img src="inspo/concept.png" alt="Inspiration reference 09" loading="lazy"><span>Reference 09</span></a>
+    </div>
+  </main>
+  <dialog id="lightbox" aria-label="Image viewer">
+    <div class="lightbox-bar"><p id="caption" aria-live="polite"></p><div class="controls"><button type="button" id="previous" aria-label="Previous image">←</button><button type="button" id="next" aria-label="Next image">→</button><button type="button" id="close" aria-label="Close image viewer">✕</button></div></div>
+    <div class="viewer"><img id="full" alt=""></div>
+  </dialog>
+  <script>
+    const tiles = [...document.querySelectorAll('.tile')];
+    const dialog = document.querySelector('#lightbox');
+    const full = document.querySelector('#full');
+    const caption = document.querySelector('#caption');
+    let current = 0;
+    let opener = null;
+    function show(index) {
+      current = (index + tiles.length) % tiles.length;
+      const tile = tiles[current];
+      full.src = tile.href;
+      full.alt = tile.querySelector('img').alt;
+      caption.textContent = `${tile.querySelector('span').textContent} · ${current + 1} / ${tiles.length}`;
+    }
+    tiles.forEach((tile, index) => tile.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || typeof dialog.showModal !== 'function') return;
+      event.preventDefault();
+      opener = tile;
+      show(index);
+      dialog.showModal();
+      document.querySelector('#close').focus();
+    }));
+    document.querySelector('#previous').addEventListener('click', () => show(current - 1));
+    document.querySelector('#next').addEventListener('click', () => show(current + 1));
+    document.querySelector('#close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); show(current + (event.key === 'ArrowRight' ? 1 : -1)); }
+    });
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => { full.removeAttribute('src'); opener?.focus(); });
+  </script>
+</body>
+</html>
