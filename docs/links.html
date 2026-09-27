@@ -25,9 +25,18 @@
     .name { display: block; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 650; line-height: 1.15; letter-spacing: -.035em; margin-top: 18px; }
     .desc { display: block; font-size: .96rem; line-height: 1.45; color: #b6c1c8; margin-top: 8px; }
     .arrow { font-size: 1.5rem; align-self: flex-end; }
+    .feature { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); border: 1px solid #344350; border-radius: 16px; overflow: hidden; background: #19232d; }
+    .feature-preview { display: grid; place-items: center; min-height: 320px; padding: 18px; background: #0c131a; }
+    .feature-preview img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: contain; }
+    .feature-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 3vw, 42px); }
+    .feature-copy .name { margin: 16px 0 0; }
+    .feature-copy .desc { margin-bottom: 22px; }
+    .feature-gallery { align-self: flex-start; color: #97e4c2; text-decoration: none; font-size: .9rem; }
+    .feature-gallery:hover { text-decoration: underline; }
+    .feature-preview:focus-visible, .feature-gallery:focus-visible { outline: 2px solid #97e4c2; outline-offset: -4px; }
     footer { border-top: 1px solid #344350; color: #a8b5be; padding-top: 25px; font-size: .85rem; }
     footer a { color: #d6f5e6; }
-    @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } .card { min-height: 190px; } h1 { margin-top: 60px; } }
+    @media (max-width: 650px) { .grid, .feature { grid-template-columns: 1fr; } .card { min-height: 190px; } .feature-preview { min-height: 240px; } h1 { margin-top: 60px; } }
   </style>
 </head>
 <body>
@@ -38,6 +47,10 @@
     <section aria-labelledby="concepts"><h2 id="concepts">Site and brand concepts</h2><div class="grid">
       <a class="card" href="concept-two/"><span><span class="tag">Selected site direction</span><span class="name">Innovate Connects homepage</span><span class="desc">The working homepage concept, now featuring the chosen report and workshop artwork.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
       <a class="card" href="concept-two/brand-direction.html"><span><span class="tag">Alternative brand concept</span><span class="name">Brand direction</span><span class="desc">A separate visual and strategic direction to explore.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    </div></section>
+    <section aria-labelledby="mockup"><h2 id="mockup">Featured mock-up</h2><div class="feature">
+      <a class="feature-preview" href="concept-two/inspo/concept.png" target="_blank" rel="noopener" aria-label="Open inspiration reference 09 at full size"><img src="concept-two/inspo/concept.png" alt="Innovate Connects mock-up — inspiration reference 09" loading="lazy" decoding="async"></a>
+      <div class="feature-copy"><span class="tag">Inspiration reference 09</span><span class="name">See the direction in context.</span><span class="desc">A mock-up from the visual reference collection. Open the image at full size, or explore the rest of the inspiration gallery.</span><a class="feature-gallery" href="concept-two/inspiration.html">Browse all references ↗</a></div>
     </div></section>
     <section aria-labelledby="more"><h2 id="more">Explorations</h2><div class="grid">
       <a class="card" href="concept-two/logo-ideas.html"><span><span class="tag">Identity</span><span class="name">Logo ideas</span><span class="desc">Explore the logo concepts.</span></span><span class="arrow" aria-hidden="true">↗</span></a>
