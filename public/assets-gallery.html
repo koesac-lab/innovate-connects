@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Assets gallery — Innovate Connects</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;background:#10151c;color:#f4f4f0;--stage:#fff;--pattern:repeating-conic-gradient(#ddd 0% 25%,#fff 0% 50%)}*{box-sizing:border-box}body{margin:0}main{max-width:1600px;margin:auto;padding:clamp(20px,4vw,60px)}a{color:#97e4c2}h1{font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:-.05em;margin:28px 0 12px}.intro,.muted{color:#b6c1c8;line-height:1.6}.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#19232d;padding:18px;border:1px solid #344350;border-radius:12px;margin:24px 0}button,input,select{font:inherit}button,.download,select,input[type=search],input[type=number]{border:1px solid #536473;border-radius:6px;background:#10151c;color:#f4f4f0;padding:9px 12px}button{cursor:pointer}button[aria-pressed=true]{border-color:#97e4c2;box-shadow:inset 0 0 0 1px #97e4c2}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #97e4c2;outline-offset:3px}label{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}input[type=color]{width:48px;height:40px;border:0;background:none}input[type=number]{width:88px}input[type=search]{max-width:100%;flex:1;min-width:180px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:22px}.card{min-width:0;overflow:hidden;background:#19232d;border:1px solid #344350;border-radius:12px}.stage{background-color:var(--stage);background-image:var(--pattern);background-size:24px 24px}.preview{display:grid;place-items:center;width:100%;height:270px;padding:12px;border:0;border-radius:0}.preview img{max-width:100%;max-height:246px;object-fit:contain}.info{padding:20px}.info h2{font-size:1.05rem;margin:0 0 14px;overflow-wrap:anywhere}dl{display:grid;grid-template-columns:105px 1fr;gap:8px;font-size:.9rem;line-height:1.45}dt{color:#adb9c3}dd{margin:0;overflow-wrap:anywhere}.download{display:inline-block;text-decoration:none;margin-top:12px}.empty{padding:30px;border:1px dashed #536473;border-radius:12px;line-height:1.7}dialog{color:#f4f4f0;background:#19232d;border:1px solid #536473;border-radius:12px;width:96vw;max-width:1500px;max-height:94vh;padding:18px}dialog::backdrop{background:#000c}.modal-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}.modal-head h2{font-size:1rem;overflow-wrap:anywhere;flex:1}.viewport{height:65vh;overflow:auto;display:block;text-align:center}.viewport img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;margin:auto}.viewport.actual img{max-width:none;max-height:none}#detail-meta{white-space:pre-line;font-size:.9rem;line-height:1.6}code{overflow-wrap:anywhere}noscript{display:block;padding:20px}
+</style>
+</head>
+<body><main>
+<nav aria-label="Review navigation"><a href="./">Website</a> · <a href="assets-gallery.html" aria-current="page">Assets gallery</a></nav>
+<h1>Assets gallery.</h1><p class="intro">Review the artwork, compare versions and test transparency. Pixel dimensions describe the image; embedded DPI is reported separately. Missing DPI is never assumed.</p>
+<div class="tools" aria-label="Gallery controls">
+<span>Background</span><button type="button" data-bg="checker" aria-pressed="true">Checkerboard</button><button type="button" data-bg="#ffffff" aria-pressed="false">White</button><button type="button" data-bg="#10151c" aria-pressed="false">Dark</button><label>Custom <input id="colour" type="color" value="#008080"></label>
+<label>Print estimate <input id="print-dpi" type="number" min="1" max="9600" value="300"> DPI</label>
+<input id="search" type="search" placeholder="Filter by filename or folder" aria-label="Filter assets">
+</div>
+<p class="muted">Print estimates below use the chosen DPI, not a change to the file. Embedded DPI and native print size are shown separately when available. Original files are loaded lazily; large poster images may take time to open.</p>
+<p id="status" role="status" aria-live="polite">Loading asset index…</p><div id="gallery" class="grid"></div>
+<noscript>Enable JavaScript to browse the asset index and use background controls.</noscript>
+<dialog id="viewer" aria-labelledby="detail-title"><div class="modal-head"><h2 id="detail-title"></h2><button id="zoom" type="button" aria-pressed="false">100% pixels</button><button id="close" type="button">Close</button></div><div id="viewport" class="viewport stage"><img id="detail-image" alt=""></div><p id="detail-meta"></p><a id="detail-download" class="download" download>Download original</a></dialog>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+let items = [], current = null;
+const number = n => Number(n).toLocaleString('en-GB', {maximumFractionDigits: 1});
+const pixels = a => a.width && a.height ? `${number(a.width)} × ${number(a.height)} px (${number(a.width*a.height/1e6)} MP)` : 'Not available';
+const validDpi = a => a.dpi && a.dpi.length === 2 && a.dpi.every(n => Number.isFinite(n) && n > 0);
+const dpiText = a => validDpi(a) ? `${number(a.dpi[0])} × ${number(a.dpi[1])} DPI (${a.dpiSource})` : 'Not recorded / unsupported metadata';
+const sizeAt = (a, x, y=x) => a.width && a.height ? `${number(a.width/x*2.54)} × ${number(a.height/y*2.54)} cm` : 'Not available';
+const chosenDpi = () => Math.min(9600, Math.max(1, Number($('print-dpi').value) || 300));
+const bytes = n => n < 1048576 ? `${number(n/1024)} KB` : `${number(n/1048576)} MB`;
+function setBackground(value) {
+  document.documentElement.style.setProperty('--stage', value === 'checker' ? '#fff' : value);
+  document.documentElement.style.setProperty('--pattern', value === 'checker' ? 'repeating-conic-gradient(#ddd 0% 25%,#fff 0% 50%)' : 'none');
+  document.querySelectorAll('[data-bg]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.bg === value)));
+}
+document.querySelectorAll('[data-bg]').forEach(b => b.addEventListener('click', () => setBackground(b.dataset.bg)));
+$('colour').addEventListener('input', e => setBackground(e.target.value));
+function metadata(a) {
+  return [['Resolution', pixels(a)], ['File', `${a.format} · ${bytes(a.bytes)}`], ['Embedded DPI', dpiText(a)], ['Native print', validDpi(a) ? sizeAt(a,...a.dpi) : 'No embedded print size'], [`At ${chosenDpi()} DPI`, sizeAt(a,chosenDpi())]];
+}
+function fillDetails(a, dl) {
+  dl.replaceChildren();
+  metadata(a).forEach(([key,value]) => {const dt=document.createElement('dt'), dd=document.createElement('dd');dt.textContent=key;dd.textContent=value;dl.append(dt,dd);});
+}
+function detailText(a) {return `${a.name}\n${metadata(a).map(([k,v]) => `${k}: ${v}`).join('\n')}`;}
+function openAsset(a) {
+  current=a;$('detail-title').textContent=a.name;$('detail-image').src=a.url;$('detail-image').alt=a.name;
+  $('detail-meta').textContent=detailText(a);$('detail-download').href=a.url;
+  $('viewport').classList.remove('actual');$('zoom').setAttribute('aria-pressed','false');$('viewer').showModal();
+}
+$('close').addEventListener('click', () => $('viewer').close());
+$('viewer').addEventListener('close', () => {$('detail-image').removeAttribute('src');current=null;});
+$('zoom').addEventListener('click', () => {$('zoom').setAttribute('aria-pressed',String($('viewport').classList.toggle('actual')));});
+function render() {
+  const query=$('search').value.toLowerCase(), filtered=items.filter(a=>a.name.toLowerCase().includes(query));
+  $('gallery').replaceChildren();$('status').textContent=`${filtered.length} of ${items.length} assets`;
+  if (!items.length) {
+    const note=document.createElement('p');note.className='empty';note.textContent='No assets yet. Add PNG, JPEG, WebP or GIF files to public/assets/gallery/ (subfolders supported), then deploy or rebuild the site. The build creates the index automatically; no manual filename list is needed.';$('gallery').append(note);return;
+  }
+  for (const a of filtered) {
+    const card=document.createElement('article');card.className='card';
+    const button=document.createElement('button');button.type='button';button.className='preview stage';button.setAttribute('aria-label',`Inspect ${a.name}`);
+    const img=document.createElement('img');img.alt=a.name;img.loading='lazy';img.decoding='async';img.src=a.url;
+    const info=document.createElement('div');info.className='info';const title=document.createElement('h2');title.textContent=a.name;const dl=document.createElement('dl');fillDetails(a,dl);
+    img.addEventListener('load',()=>{if (!a.width || !a.height) {a.width=img.naturalWidth;a.height=img.naturalHeight;fillDetails(a,dl);}});
+    img.addEventListener('error',()=>{const warning=document.createElement('p');warning.textContent='Preview unavailable — download the original to inspect it.';info.append(warning);});
+    button.addEventListener('click',()=>openAsset(a));button.append(img);
+    const download=document.createElement('a');download.className='download';download.href=a.url;download.download='';download.textContent='Download original';info.append(title,dl,download);card.append(button,info);$('gallery').append(card);
+  }
+}
+$('search').addEventListener('input',render);
+$('print-dpi').addEventListener('change',()=>{render();if(current)$('detail-meta').textContent=detailText(current);});
+fetch('assets/gallery/index.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Asset index unavailable');return r.json();}).then(data=>{
+  if (!Array.isArray(data)) throw Error('Invalid asset index');
+  items=data.filter(a=>typeof a.name==='string' && typeof a.url==='string' && a.url.startsWith('assets/gallery/'));render();
+}).catch(()=>{$('status').textContent='The asset index could not be loaded. Deploy the site through the existing build, or run python3 tools/build_pages.py and serve _site/. The gallery is generated during the build.';});
+</script></body></html>
