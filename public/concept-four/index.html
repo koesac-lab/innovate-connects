@@ -1,12 +1,323 @@
 <!doctype html>
 <html lang="en-GB">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Innovate Connects | Concept 4</title>
-<style>
-:root{--mist:#eaf3ef;--ink:#143330;--teal:#0a4f54;--gold:#c49b4c;--wine:#7a2038;--white:#fff;--g:clamp(1.25rem,6vw,7rem)}*{box-sizing:border-box}body{margin:0;background:var(--mist);color:var(--ink);font:1rem/1.55 'Aptos','Trebuchet MS',sans-serif}a{color:inherit;text-underline-offset:.25em}a:focus-visible{outline:3px solid var(--wine);outline-offset:4px}header,footer{display:flex;justify-content:space-between;align-items:center;gap:1rem 2rem;flex-wrap:wrap;padding:1.2rem var(--g)}nav{display:flex;flex-wrap:wrap;gap:.65rem 1.3rem}.brand{font-weight:800}.skip{position:absolute;top:0;left:0;background:white;padding:.75rem;transform:translateY(-120%)}.skip:focus{transform:none}section{padding:clamp(3rem,8vw,8rem) var(--g)}.hero,.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,6rem);align-items:center}h1,h2,h3{margin:0;line-height:1.04;letter-spacing:-.045em}h1{font-size:clamp(3rem,6.4vw,7rem);max-width:12ch}h2{font-size:clamp(2.2rem,4.4vw,5rem);max-width:16ch}h3{font-size:1.55rem}p{max-width:54ch}.lede{font-size:clamp(1.05rem,1.6vw,1.35rem)}.button{display:inline-block;padding:.75rem 1.15rem;background:var(--teal);color:white;font-weight:700}.button:hover{background:var(--wine)}figure{margin:0;background:var(--teal);color:white;padding:clamp(1rem,3vw,2.5rem)}svg{display:block;width:100%;height:auto}figcaption{max-width:38ch;margin:.8rem 0 0}#work{background:var(--white);align-items:start}.offer{margin:0;padding:0;list-style:none}.offer li{border-top:1px solid var(--teal);padding:1.1rem 0}.offer p{margin:.45rem 0 0}#start{background:var(--wine);color:white}#start a:focus-visible{outline-color:white}footer{border-top:1px solid var(--teal)}@media(max-width:46rem){.hero,.split{grid-template-columns:1fr}h1{max-width:14ch}}
-</style></head>
-<body><a class="skip" href="#main">Skip to content</a><header><span class="brand">Innovate Connects</span><nav aria-label="Main navigation"><a href="#work">What we do</a><a href="#start">Where to start</a></nav></header>
-<main id="main"><section class="hero" aria-labelledby="headline"><div><h1 id="headline">What’s worth connecting?</h1><p class="lede">Innovate Connects is a telecoms adoption consultancy. We help public and private-sector organisations decide where emerging connectivity can solve a real problem and what it will take for people to use it.</p><a class="button" href="#work">See how we work</a></div>
-<figure><svg viewBox="0 0 450 300" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#c49b4c" stroke-width="2.5"><path d="M145 60H172C226 60 220 150 270 150H289M145 150H289M145 240H172C226 240 220 150 270 150"/><circle cx="291" cy="150" r="7" fill="#c49b4c"/></g><g fill="#fff" font-family="sans-serif" font-size="17"><text x="4" y="65">Network evidence</text><text x="4" y="155">Policy constraints</text><text x="4" y="245">User needs</text><text x="315" y="145">A decision</text><text x="315" y="168">worth testing</text></g></svg><figcaption>Bring network evidence, policy constraints and user needs together before deciding what to test.</figcaption></figure></section>
-<section id="work" class="split" aria-labelledby="work-title"><div><h2 id="work-title">From evidence to adoption.</h2><p>For public bodies, businesses and telecoms teams working out where better connectivity can make a difference.</p></div><ul class="offer"><li><h3>Research</h3><p>Work out what the technology can do, where it could help and what might get in the way.</p></li><li><h3>Workshops</h3><p>Bring technical teams, decision-makers and the people affected into the same conversation. Agree on the problem and what to test.</p></li><li><h3>Adoption strategy</h3><p>Decide what to prioritise, who needs to be involved and how to tell whether a trial is worth taking further.</p></li></ul></section>
-<section id="start" class="split" aria-labelledby="start-title"><h2 id="start-title">Start with the problem, not the network.</h2><div><p>What should connectivity make easier? Who needs to use it? What would convince you it’s working? Those questions give a first conversation a useful starting point.</p><a href="#work">Explore the approach</a></div></section></main>
-<footer><span>Innovate Connects</span><nav aria-label="Concept review"><a href="../index.html">Current homepage</a><a href="../concept-three/index.html">Concept 3</a></nav></footer></body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#eaf3ef">
+  <meta name="description" content="Innovate Connects is a UK telecoms adoption consultancy helping public and private-sector organisations turn emerging connectivity into measurable adoption.">
+  <title>Innovate Connects — What’s worth connecting?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="Innovate Connects home">
+        <img class="brand-mark" src="../assets/brand/connectivity-mark.svg" width="34" height="28" alt="" aria-hidden="true">
+        <span class="brand-name">Innovate Connects</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <span class="menu-toggle-label">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-site-nav>
+        <a href="#gap">The challenge</a>
+        <a href="#process">How we work</a>
+        <a href="#sectors">Where we help</a>
+        <a href="#perspectives">Perspectives</a>
+        <a class="nav-cta" href="#start">Start a conversation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-heading">What’s worth connecting?</h1>
+          <p class="lede">Innovate Connects is a telecoms adoption consultancy. We help public bodies, enterprises and infrastructure teams decide where emerging connectivity solves a real problem, and what it takes for people to actually use it.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#process">See how we work</a>
+            <a class="text-link" href="#start">Frame a challenge</a>
+          </div>
+        </div>
+
+        <figure class="lens" aria-labelledby="lens-caption">
+          <div class="lens-controls" role="tablist" aria-label="Example connectivity decisions">
+            <button class="lens-tab" type="button" role="tab" aria-selected="true" data-scenario="health">Rural health</button>
+            <button class="lens-tab" type="button" role="tab" aria-selected="false" data-scenario="logistics">Port logistics</button>
+            <button class="lens-tab" type="button" role="tab" aria-selected="false" data-scenario="rail">Regional rail</button>
+          </div>
+
+          <div class="lens-diagram">
+            <svg viewBox="0 0 460 270" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="lens-paths" stroke="#c49b4c" stroke-width="2.25">
+                <path d="M162 46H196C244 46 238 135 282 135H304"/>
+                <path d="M162 135H304"/>
+                <path d="M162 224H196C244 224 238 135 282 135"/>
+              </g>
+              <circle cx="162" cy="46" r="4.5" fill="#eaf3ef"/>
+              <circle cx="162" cy="135" r="4.5" fill="#eaf3ef"/>
+              <circle cx="162" cy="224" r="4.5" fill="#eaf3ef"/>
+              <circle class="lens-node" cx="306" cy="135" r="8" fill="#c49b4c"/>
+              <g fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="600">
+                <text x="6" y="42">Network evidence</text>
+                <text x="6" y="131">Policy constraints</text>
+                <text x="6" y="220">User needs</text>
+                <text x="326" y="130">Decision</text>
+                <text x="326" y="150">worth testing</text>
+              </g>
+              <g fill="#c9deda" font-family="Plus Jakarta Sans, sans-serif" font-size="11.5">
+                <text x="6" y="61" data-svg-network>Mobile + satellite mix</text>
+                <text x="6" y="150" data-svg-policy>NHS &amp; council procurement</text>
+                <text x="6" y="239" data-svg-users>District nurse handovers</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="lens-readout" aria-live="polite">
+            <p class="lens-outcome" data-scenario-outcome>Test hybrid cellular-satellite kits with two community nursing teams before commissioning a county-wide rollout.</p>
+            <figcaption id="lens-caption" data-scenario-summary>Network capability only matters when procurement rules and frontline workflows align around the same test.</figcaption>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band band-chalk" id="gap" aria-labelledby="gap-heading">
+      <div class="container">
+        <div class="split-head">
+          <h2 id="gap-heading">Infrastructure is only half the work.</h2>
+          <p class="section-intro">Most connectivity programmes stall in the space between a working technical trial and everyday use. The network performs on paper, yet budgets, operational habits and accountability remain unaligned.</p>
+        </div>
+
+        <div class="contrast-grid">
+          <div class="contrast-col">
+            <h3>What usually gets funded</h3>
+            <ul class="ruled-list">
+              <li>Coverage modelling and spectrum feasibility studies</li>
+              <li>Isolated hardware pilots run by a single technical team</li>
+              <li>Vendor-led showcases measured by peak throughput</li>
+            </ul>
+          </div>
+          <div class="contrast-col contrast-col-accent">
+            <h3>What actually drives adoption</h3>
+            <ul class="ruled-list">
+              <li>A clear operational problem shared across leadership and frontline teams</li>
+              <li>Commercial and regulatory pathways that survive beyond grant funding</li>
+              <li>Evidence that people trust the service enough to change how they work</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-mist" id="process" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="split-head">
+          <h2 id="process-heading">Four steps from evidence to adoption.</h2>
+          <p class="section-intro">Every engagement follows a clear sequence so organisations know what is being decided at each stage and what they will hold at the end of it.</p>
+        </div>
+
+        <ol class="steps-grid">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3>Assess</h3>
+            <p>Map the connectivity landscape, stakeholder incentives and practical barriers shaping the opportunity.</p>
+            <p class="step-output">Output: Evidence brief and barrier map</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3>Frame</h3>
+            <p>Bring technical teams, policy leads and end users into the same room to agree which problem is worth solving first.</p>
+            <p class="step-output">Output: Shared priority and test criteria</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3>Enable</h3>
+            <p>Design the commercial model, governance and operational support required for people to adopt the service confidently.</p>
+            <p class="step-output">Output: Adoption roadmap and partner plan</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <h3>Measure</h3>
+            <p>Define plain-language outcome measures so sponsors can decide whether to scale, adapt or stop.</p>
+            <p class="step-output">Output: Impact framework and scale decision</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band band-harbour" id="sectors" aria-labelledby="sectors-heading">
+      <div class="container">
+        <div class="split-head">
+          <h2 id="sectors-heading">Where we help.</h2>
+          <p class="section-intro">We work across the public, enterprise and telecoms divide—often with organisations that need to collaborate but speak different operational languages.</p>
+        </div>
+
+        <div class="sector-columns">
+          <article class="sector-block">
+            <h3>Public sector</h3>
+            <p>Local authorities, health trusts and regional programmes turning national connectivity ambition into accessible services and stronger places.</p>
+            <dl class="sector-detail">
+              <dt>Common blocker</dt>
+              <dd>Funding streams favour capital build over operational readiness and user support.</dd>
+              <dt>How we help</dt>
+              <dd>Cross-departmental workshops, business-case framing and citizen-centred adoption plans.</dd>
+            </dl>
+          </article>
+
+          <article class="sector-block">
+            <h3>Enterprise</h3>
+            <p>Industrial, logistics and campus operators evaluating private cellular, IoT or hybrid networks to change how sites run.</p>
+            <dl class="sector-detail">
+              <dt>Common blocker</dt>
+              <dd>Promising technical proofs of concept fail to win operational ownership on site.</dd>
+              <dt>How we help</dt>
+              <dd>Use-case prioritisation, workforce alignment and clear criteria for moving past pilot stage.</dd>
+            </dl>
+          </article>
+
+          <article class="sector-block">
+            <h3>Telecoms and infrastructure</h3>
+            <p>Operators, neutral hosts and satellite or NTN providers translating network capability into propositions customers understand and trust.</p>
+            <dl class="sector-detail">
+              <dt>Common blocker</dt>
+              <dd>Technical specifications dominate the pitch while buyer risk and integration effort go unanswered.</dd>
+              <dt>How we help</dt>
+              <dd>Adoption research, proposition clarity and partner ecosystem alignment.</dd>
+            </dl>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-chalk" id="perspectives" aria-labelledby="perspectives-heading">
+      <div class="container">
+        <div class="split-head">
+          <h2 id="perspectives-heading">Perspectives on adoption.</h2>
+          <p class="section-intro">Short briefings drawn from our work across telecoms strategy, public-private alignment and emerging network trials.</p>
+        </div>
+
+        <div class="briefings-list">
+          <article class="briefing-row">
+            <div class="briefing-main">
+              <h3>Why connectivity trials stall after the pilot</h3>
+              <p>A technical pilot proves a signal can reach a site. Adoption requires knowing who owns the service, who pays in year three and what changes on Monday morning.</p>
+            </div>
+            <div class="briefing-action">
+              <button class="btn btn-outline" type="button" data-open-dialog="briefing-pilots">Read the briefing</button>
+            </div>
+          </article>
+
+          <article class="briefing-row">
+            <div class="briefing-main">
+              <h3>Aligning public ambition with private network reality</h3>
+              <p>Public bodies buy outcomes for communities; infrastructure partners invest against predictable demand. Bridging that gap starts before procurement opens.</p>
+            </div>
+            <div class="briefing-action">
+              <button class="btn btn-outline" type="button" data-open-dialog="briefing-alignment">Read the briefing</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-oxblood" id="start" aria-labelledby="start-heading">
+      <div class="container start-grid">
+        <div class="start-copy">
+          <h2 id="start-heading">Start with the problem, not the network.</h2>
+          <p>A useful first conversation does not need a finished specification. Three plain questions are enough to establish whether we can help:</p>
+          <ul class="question-list">
+            <li>What should better connectivity make easier for your organisation or community?</li>
+            <li>Who needs to trust and use it for the investment to count?</li>
+            <li>What evidence would convince you it is working?</li>
+          </ul>
+        </div>
+
+        <div class="brief-builder">
+          <h3>Draft a conversation starter</h3>
+          <p class="builder-note">Select your context to assemble a short brief you can copy into an email or message.</p>
+
+          <form class="builder-form" data-brief-form>
+            <fieldset>
+              <legend>Organisation type</legend>
+              <div class="chip-group">
+                <label class="chip"><input type="radio" name="sector" value="Public sector" checked><span>Public sector</span></label>
+                <label class="chip"><input type="radio" name="sector" value="Enterprise"><span>Enterprise</span></label>
+                <label class="chip"><input type="radio" name="sector" value="Telecoms or infrastructure"><span>Telecoms or infrastructure</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Where you are now</legend>
+              <div class="chip-group">
+                <label class="chip"><input type="radio" name="stage" value="Exploring where emerging connectivity could help" checked><span>Exploring options</span></label>
+                <label class="chip"><input type="radio" name="stage" value="Aligning stakeholders before a trial"><span>Aligning stakeholders</span></label>
+                <label class="chip"><input type="radio" name="stage" value="Moving a pilot into sustained adoption"><span>Scaling a pilot</span></label>
+              </div>
+            </fieldset>
+
+            <div class="draft-box">
+              <p class="draft-text" data-draft-output>We are a public sector team exploring where emerging connectivity could help. We would like to discuss how to align network evidence, policy constraints and user needs before deciding what to test.</p>
+            </div>
+
+            <div class="builder-actions">
+              <button class="btn btn-light" type="button" data-copy-draft>Copy brief</button>
+              <span class="copy-status" role="status" aria-live="polite" data-copy-status></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">Innovate Connects</span>
+        <p>Telecoms adoption consultancy.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Concept review">
+        <a href="../../index.html">All directions</a>
+        <a href="../index.html">Current homepage</a>
+        <a href="../concept-three/index.html">Concept 3</a>
+      </nav>
+    </div>
+  </footer>
+
+  <dialog class="briefing-dialog" id="briefing-pilots" aria-labelledby="dialog-pilots-title">
+    <div class="dialog-inner">
+      <div class="dialog-header">
+        <h2 id="dialog-pilots-title">Why connectivity trials stall after the pilot</h2>
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close briefing">Close</button>
+      </div>
+      <div class="dialog-body">
+        <p>Across 5G testbeds, private wireless deployments and rural connectivity schemes, technical success is rarely the scarce ingredient. Equipment performs, latency drops and coverage maps look convincing. Yet twelve months later, the project is still described as a trial.</p>
+        <p>The cause is almost always structural. Pilots are funded to test whether a technology works, not whether an organisation is ready to run it. Operational teams are consulted late, ongoing support costs sit outside anyone’s baseline budget, and success metrics track network speed rather than service outcomes.</p>
+        <p>Closing that gap means designing adoption before the first mast or gateway is switched on: naming the operational owner, agreeing the decision criteria for scale, and testing the human workflow alongside the radio link.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="briefing-dialog" id="briefing-alignment" aria-labelledby="dialog-alignment-title">
+    <div class="dialog-inner">
+      <div class="dialog-header">
+        <h2 id="dialog-alignment-title">Aligning public ambition with private network reality</h2>
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close briefing">Close</button>
+      </div>
+      <div class="dialog-body">
+        <p>Public authorities and telecoms providers often share the same destination—better regional connectivity—while working to incompatible timelines and incentives. Councils focus on social value, inclusion and geographic equity; operators must justify capital expenditure through durable take-up.</p>
+        <p>When those perspectives meet only at formal procurement, both sides protect against risk instead of solving the adoption problem. Tenders become rigid, bids become cautious, and the resulting service struggles to find active users.</p>
+        <p>Early, structured collaboration changes the dynamic. By bringing policy leads, anchor users and network specialists together to test assumptions openly, both sides can shape a proposition that is commercially realistic and genuinely useful to the communities it serves.</p>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
