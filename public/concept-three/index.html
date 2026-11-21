@@ -1,29 +1,25 @@
 <!doctype html>
 <html lang="en-GB">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Innovate Connects — Concept 3</title>
 <style>
-:root{font-family:system-ui,sans-serif;color:#152d2d;background:#f5f2e9;--ink:#102628;--gold:#dfbb78}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:.25em}a:focus-visible{outline:3px solid #ae7131;outline-offset:5px}.wrap{width:min(90%,84rem);margin-inline:auto}.hero{background:var(--ink);color:#f7f3e9}header .wrap,footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;padding-block:1.4rem}header .wrap{border-bottom:1px solid #ffffff35}nav{display:flex;flex-wrap:wrap;gap:1.3rem}.wordmark{font-weight:750;text-decoration:none}.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:2rem;padding-block:clamp(3rem,8vw,8rem)}.eyebrow{font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;font-weight:750}.hero .eyebrow{color:var(--gold)}h1,h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.055em;line-height:.98;margin:.3em 0}h1{font-size:clamp(3.1rem,7vw,8rem)}h2{font-size:clamp(2.4rem,5vw,5rem)}p{line-height:1.6}.intro{max-width:32rem;color:#d5dfda;font-size:1.15rem}.button{display:inline-block;margin-top:.8rem;padding:.85rem 1.15rem;background:var(--gold);color:var(--ink);font-weight:700;text-decoration:none}.art{margin:0;min-width:0}.art img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:contain}.work{padding-block:clamp(3rem,8vw,7rem)}.work .eyebrow{color:#785222}.work>p{max-width:39rem}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;margin-top:2.5rem}.grid article{border-top:1px solid #ad9163;padding-top:1.15rem}.grid span{color:#785222;font-variant-numeric:tabular-nums}h3{font-size:1.38rem;margin:.65rem 0}.grid p{margin:.4rem 0;color:#405352}.closing{background:#e8e1d1;padding-block:clamp(2.5rem,6vw,5rem)}.closing p{max-width:34rem}footer{border-top:1px solid #c8bca4}.skip{position:absolute;top:1rem;left:1rem;background:#fff;color:#102628;padding:.7rem;transform:translateY(-200%)}.skip:focus{transform:none}@media(max-width:720px){.stage,.grid{grid-template-columns:1fr}.stage{gap:1.5rem}.art img{max-height:20rem}.grid{gap:1rem}}
+:root{color:#102e2c;background:#fff;font:100%/1.55 system-ui,sans-serif;--gold:#92703e;--g:clamp(1.25rem,5.5vw,7rem)}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:.25em}a:focus-visible{outline:2px solid currentColor;outline-offset:5px}header,footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem 2rem;padding:1.2rem var(--g)}header{position:relative;z-index:1;background:#fff}nav{display:flex;flex-wrap:wrap;gap:1rem}.wordmark{font-weight:800;text-decoration:none}.hero{position:relative;display:grid;isolation:isolate}.hero img,.hero-copy{grid-area:1/1}.hero img{width:100%;display:block;align-self:end}.hero-copy{z-index:1;align-self:start;padding:clamp(1rem,4.2vw,6rem) var(--g) 0}.label{font-size:.73rem;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:#6a4e28;margin:0 0 .8rem}h1,h2,h3{font-family:Georgia,serif;font-weight:400;letter-spacing:-.055em;line-height:.98;margin:0}h1{font-size:clamp(2.8rem,5.8vw,8rem);max-width:9ch}h2{font-size:clamp(2.6rem,5.5vw,6rem);max-width:13ch}h3{font-size:clamp(2rem,3.3vw,3.8rem)}.hero-copy>p:not(.label){max-width:29ch;font-size:clamp(.9rem,1.24vw,1.3rem);margin:.9rem 0}.cta{display:inline-block;border-bottom:1px solid var(--gold);padding:.2rem 0;font-weight:700;text-decoration:none}.cta:hover{border-bottom-color:currentColor}.editorial{background:#f7f4eb;padding:clamp(3rem,8vw,9rem) var(--g)}.feature,.practice{max-width:90rem;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.72fr);gap:2rem 8vw}.feature{border-top:1px solid var(--gold);padding-top:1.4rem}.feature aside{align-self:end;max-width:34ch}.practice{margin-top:clamp(3rem,9vw,10rem);grid-template-columns:minmax(0,.65fr) minmax(0,1fr)}.practice article+article{margin-top:2rem}.practice p{max-width:45ch}.skip{position:absolute;z-index:2;top:0;left:0;background:#fff;padding:.8rem;transform:translateY(-120%)}.skip:focus{transform:none}footer{background:#102e2c;color:#fff}@media(max-width:950px){.hero img,.hero-copy{grid-area:auto}.hero-copy{grid-row:1;padding-top:2.25rem;padding-bottom:1.5rem}.hero img{grid-row:2;aspect-ratio:1.75;object-fit:cover;object-position:70% 60%}h1{font-size:clamp(3rem,8.5vw,6rem);max-width:11ch}}@media(max-width:650px){.feature,.practice{grid-template-columns:1fr;gap:1.4rem}}
 </style>
-</head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<div class="hero">
-<header><div class="wrap"><a class="wordmark" href="./">Innovate Connects</a><nav aria-label="Main navigation"><a href="#work">What we do</a><a href="../">Concept 2</a></nav></div></header>
-<main id="main"><section class="stage wrap" aria-labelledby="title">
-<div><p class="eyebrow">Research · Strategy · Collaboration</p><h1 id="title">Make sense of what’s next.</h1><p class="intro">We help organisations understand emerging connectivity, bring the right people together and decide what to do next.</p><a class="button" href="#work">Explore our work</a></div>
-<figure class="art"><img src="../assets/gallery/2026-11-18%2020.16.44.png" alt="" fetchpriority="high" decoding="async"></figure>
-</section></div>
-<section class="work wrap" id="work"><p class="eyebrow">What we do</p><h2>From signal to direction.</h2><p>We make complex changes in connectivity easier to understand, discuss and act on.</p><div class="grid">
-<article><span>01</span><h3>Research and perspectives</h3><p>Understand what is changing, why it matters and where the evidence points.</p></article>
-<article><span>02</span><h3>Workshops and facilitation</h3><p>Bring different perspectives together around a shared question and leave with clear next steps.</p></article>
-<article><span>03</span><h3>Strategy and communication</h3><p>Turn technical insight into a clear direction and a story others can use.</p></article>
-</div></section>
-<section class="closing"><div class="wrap"><p class="eyebrow">Innovate Connects</p><h2>Good questions bring people together.</h2><p>Explore the original concept for more on our work and approach.</p><a href="../">Visit Innovate Connects</a></div></section>
+<a href="#main" class="skip">Skip to content</a>
+<header><a class="wordmark" href="./">Innovate Connects</a><nav aria-label="Main navigation"><a href="#perspective">Perspectives</a><a href="#practice">What we do</a></nav></header>
+<main id="main">
+<section class="hero" aria-labelledby="headline">
+<img src="../assets/gallery/2026-11-18%2020.16.44.png" width="1672" height="941" alt="" fetchpriority="high">
+<div class="hero-copy"><p class="label">Research · Strategy · Collaboration</p><h1 id="headline">Making sense of emerging connectivity.</h1><p>We help organisations understand what’s changing, bring the right people together and decide what to do next.</p><a class="cta" href="#perspective">Explore our perspective <span aria-hidden="true">↘</span></a></div>
+</section>
+<div class="editorial">
+<section class="feature" id="perspective"><div><p class="label">01 / A starting perspective</p><h2>What changes when everything can connect?</h2></div><aside><p>New networks expand what’s possible. The harder questions are where they solve a real problem, who needs to work together and what it takes to move from trial to adoption.</p><a class="cta" href="#practice">How we work <span aria-hidden="true">↘</span></a></aside></section>
+<section class="practice" id="practice"><div><p class="label">02 / In practice</p><h2>From insight to action.</h2></div><div><article><h3>Workshops</h3><p>Bring different perspectives into the room, agree on the question worth answering and leave with clear next steps.</p></article><article><h3>Strategy</h3><p>Turn technical evidence into choices people can make, explain and act on.</p></article></div></section>
+</div>
 </main>
-<footer><div class="wrap"><span>Innovate Connects · Homepage study 03</span><a href="../assets-gallery.html">Artwork gallery</a></div></footer>
+<footer><span>Innovate Connects</span><nav aria-label="Concept review"><a href="../">Concept 2</a><a href="../assets-gallery.html">Artwork gallery</a></nav></footer>
 </body>
 </html>
