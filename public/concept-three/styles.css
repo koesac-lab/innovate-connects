@@ -307,6 +307,7 @@
     pointer-events: none;
   }
 
+  /* Perspective: quiet-open-arc framing the editorial thesis */
   .ribbon-stage--perspective {
     top: -6%;
     right: -14%;
@@ -315,6 +316,7 @@
     filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.32));
   }
 
+  /* Practice: quiet-horizontal beneath the left intro column */
   .practice__ribbon {
     margin-top: clamp(1.5rem, 4vw, 3.25rem);
     width: min(100%, 27rem);
@@ -331,29 +333,32 @@
     filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.45));
   }
 
+  /* Approach: quiet-convergence (three streams merging into one) behind the 4-stage pathway */
   .ribbon-stage--approach {
     bottom: -18%;
     left: -10%;
     width: clamp(34rem, 72vw, 76rem);
-    opacity: 0.28;
+    opacity: 0.3;
   }
 
+  /* Insights: quiet-corner anchored cleanly to the bottom-right corner */
   .ribbon-stage--insights {
-    top: -12%;
-    right: -8%;
-    width: clamp(20rem, 36vw, 38rem);
+    bottom: -6%;
+    right: -4%;
+    width: clamp(18rem, 32vw, 34rem);
     opacity: 0.55;
   }
 
   :root[data-theme="dark"] .ribbon-stage--insights {
-    opacity: 0.36;
+    opacity: 0.38;
   }
 
+  /* Contact: gold-diagonal filaments rising across the dark petrol finale */
   .ribbon-stage--contact {
     bottom: -16%;
     left: -12%;
     width: clamp(30rem, 58vw, 60rem);
-    opacity: 0.34;
+    opacity: 0.42;
   }
 }
 
@@ -1191,7 +1196,7 @@
 
     .ribbon-stage--insights {
       opacity: 0.3;
-      width: 18rem;
+      width: 16rem;
     }
   }
 
