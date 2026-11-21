@@ -9,7 +9,7 @@
   const themeBtn = document.querySelector('[data-theme-toggle]');
   const themeLabel = document.querySelector('[data-theme-label]');
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-  const colorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  const colorSchemeMedia = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 
   const applyTheme = (theme, persist = false) => {
     const isDark = theme === 'dark';
@@ -42,15 +42,17 @@
     });
   }
 
-  colorSchemeMedia.addEventListener('change', (event) => {
-    try {
-      if (!localStorage.getItem('ic-theme')) {
+  if (colorSchemeMedia && colorSchemeMedia.addEventListener) {
+    colorSchemeMedia.addEventListener('change', (event) => {
+      try {
+        if (!localStorage.getItem('ic-theme')) {
+          applyTheme(event.matches ? 'dark' : 'light');
+        }
+      } catch {
         applyTheme(event.matches ? 'dark' : 'light');
       }
-    } catch {
-      applyTheme(event.matches ? 'dark' : 'light');
-    }
-  });
+    });
+  }
 
   /* Mobile navigation */
   const toggle = document.querySelector('[data-menu-toggle]');
@@ -152,7 +154,7 @@
   setTopic(activeKey);
 
   /* Smooth GPU-composited ribbon parallax and pathway filament */
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ribbonNodes = Array.from(document.querySelectorAll('[data-parallax]')).map((el) => ({
     el,
     speed: parseFloat(el.dataset.parallax || '0'),
@@ -167,7 +169,7 @@
   const pathwaySection = document.querySelector('[data-pathway-section]');
   const pathwayFill = document.querySelector('[data-pathway-fill]');
 
-  if (!reducedMotion.matches && (ribbonNodes.length > 0 || pathwayFill)) {
+  if (!reducedMotion && (ribbonNodes.length > 0 || pathwayFill)) {
     let pointerX = 0;
     let pointerY = 0;
     let rafId = null;
@@ -227,7 +229,7 @@
     window.addEventListener('scroll', requestTick, { passive: true });
     window.addEventListener('resize', requestTick, { passive: true });
 
-    if (window.matchMedia('(pointer: fine)').matches) {
+    if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
       window.addEventListener('pointermove', (event) => {
         pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
         pointerY = (event.clientY / window.innerHeight - 0.5) * 2;
