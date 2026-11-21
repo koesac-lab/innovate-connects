@@ -252,6 +252,246 @@
       "webReady": true,
       "visualDescription": "Mobile navigation toggle, click-outside/link close, and Escape-key dismissal.",
       "recommendedUse": "Include on pages using css/site-header.css."
+    },
+    {
+      "path": "web/signature-diagonal-dark-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 583664,
+      "dimensions": "2200x1237",
+      "webReady": true,
+      "route": "signature",
+      "composition": "diagonal",
+      "surface": "dark",
+      "hasAlpha": false,
+      "sourceAsset": "gallery/signature-diagonal-dark-master-v01.png",
+      "visualDescription": "Hero signature ribbon sweeping diagonally from bottom-left to top-right on a baked dark background (largest PNG master, 49.6 MB).",
+      "recommendedUse": "High-resolution print/poster master and source for web crops."
+    },
+    {
+      "path": "web/signature-diagonal-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 534816,
+      "dimensions": "1600x900",
+      "webReady": true,
+      "route": "signature",
+      "composition": "diagonal",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/signature-diagonal-alpha-source-v01.png",
+      "visualDescription": "Signature ribbon sweeping diagonally from bottom-left to top-right on a transparent background.",
+      "recommendedUse": "Hero sections, report covers, and presentation openers over custom dark or light grounds (convert to WebP for web)."
+    },
+    {
+      "path": "web/signature-horizontal-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 246676,
+      "dimensions": "1600x900",
+      "webReady": true,
+      "route": "signature",
+      "composition": "horizontal",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/signature-horizontal-alpha-source-v01.png",
+      "visualDescription": "Signature ribbon in a shallow horizontal current on a transparent background.",
+      "recommendedUse": "Banners, section dividers, and wide footers (convert to WebP for web)."
+    },
+    {
+      "path": "web/signature-vertical-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 404018,
+      "dimensions": "900x1600",
+      "webReady": true,
+      "route": "signature",
+      "composition": "vertical",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/signature-vertical-alpha-source-v01.png",
+      "visualDescription": "Signature ribbon in a vertical portrait cascade on a transparent background.",
+      "recommendedUse": "Portrait report covers, side panels, and vertical document margins (convert to WebP for web)."
+    },
+    {
+      "path": "web/signature-open-arc-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 412274,
+      "dimensions": "1254x1254",
+      "webReady": true,
+      "route": "signature",
+      "composition": "open-arc",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/signature-open-arc-alpha-source-v01.png",
+      "visualDescription": "Signature ribbon forming an open organic C-shaped arc with a clear centre on a transparent background.",
+      "recommendedUse": "Framing a key metric, statement, or focal callout (convert to WebP for web)."
+    },
+    {
+      "path": "web/signature-corner-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 97402,
+      "dimensions": "1000x563",
+      "webReady": true,
+      "route": "signature",
+      "composition": "corner",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/signature-corner-alpha-source-v01.png",
+      "visualDescription": "Compact signature ribbon flourish anchored to the bottom-right corner on a transparent background.",
+      "recommendedUse": "Subtle page or slide corner accent leaving most of the layout clear (convert to WebP for web)."
+    },
+    {
+      "path": "web/signature-convergence-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 245366,
+      "dimensions": "1600x900",
+      "webReady": true,
+      "route": "signature",
+      "composition": "convergence",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/signature-convergence-alpha-source-v01.png",
+      "visualDescription": "Signature ribbon with three horizontal streams converging smoothly into one outgoing flow on a transparent background.",
+      "recommendedUse": "Partnership, integration, and telecoms adoption themes (convert to WebP for web)."
+    },
+    {
+      "path": "web/quiet-vertical-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 121794,
+      "dimensions": "900x1600",
+      "webReady": true,
+      "route": "quiet",
+      "composition": "vertical",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/quiet-vertical-alpha-source-v01.png",
+      "visualDescription": "Quiet ribbon (no gold filaments) in a vertical cascade on a transparent background.",
+      "recommendedUse": "Everyday portrait documents, side columns, and content slides where copy leads."
+    },
+    {
+      "path": "web/quiet-horizontal-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 73296,
+      "dimensions": "1600x900",
+      "webReady": true,
+      "route": "quiet",
+      "composition": "horizontal",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/quiet-horizontal-alpha-source-v01.png",
+      "visualDescription": "Quiet ribbon (no gold filaments) in a horizontal flow on a transparent background.",
+      "recommendedUse": "Low-visual-weight section dividers, slide headers, and footers."
+    },
+    {
+      "path": "web/quiet-open-arc-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 117308,
+      "dimensions": "1254x1254",
+      "webReady": true,
+      "route": "quiet",
+      "composition": "open-arc",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/quiet-open-arc-alpha-source-v01.png",
+      "visualDescription": "Quiet ribbon (no gold filaments) forming an open C-shaped arc on a transparent background.",
+      "recommendedUse": "Restrained framing around callouts or editorial stats."
+    },
+    {
+      "path": "web/quiet-convergence-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 93304,
+      "dimensions": "1600x900",
+      "webReady": true,
+      "route": "quiet",
+      "composition": "convergence",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/quiet-convergence-alpha-source-v01.png",
+      "visualDescription": "Quiet ribbon (no gold filaments) with three horizontal streams merging into one on a transparent background.",
+      "recommendedUse": "Supporting slides and diagrams for alignment and adoption workflows."
+    },
+    {
+      "path": "web/quiet-diagonal-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 120536,
+      "dimensions": "1600x900",
+      "webReady": true,
+      "route": "quiet",
+      "composition": "diagonal",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/quiet-diagonal-alpha-source-v01.png",
+      "visualDescription": "Quiet ribbon (no gold filaments) sweeping diagonally from bottom-left to top-right on a transparent background.",
+      "recommendedUse": "Subtle supporting hero or section background where text dominates."
+    },
+    {
+      "path": "web/quiet-corner-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 36974,
+      "dimensions": "1000x563",
+      "webReady": true,
+      "route": "quiet",
+      "composition": "corner",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/quiet-corner-alpha-source-v01.png",
+      "visualDescription": "Compact quiet ribbon (no gold filaments) in a small bottom-right diagonal corner flourish on a transparent background.",
+      "recommendedUse": "Lightweight corner accent for everyday slides and white or dark documents."
+    },
+    {
+      "path": "web/gold-diagonal-alpha-web-v01.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 700418,
+      "dimensions": "1672x941",
+      "webReady": true,
+      "route": "gold",
+      "composition": "diagonal",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/gold-diagonal-alpha-source-v01.png",
+      "visualDescription": "Gold filaments only (no solid ribbons) sweeping diagonally from bottom-left to top-right on a transparent background.",
+      "recommendedUse": "Open, airy framing and document/slide backgrounds."
+    },
+    {
+      "path": "web/gold-diagonal-alpha-web-v02.webp",
+      "category": "artwork-web",
+      "status": "active",
+      "format": "WEBP",
+      "bytes": 614000,
+      "dimensions": "1672x941",
+      "webReady": true,
+      "route": "gold",
+      "composition": "diagonal",
+      "surface": "alpha",
+      "hasAlpha": true,
+      "sourceAsset": "gallery/gold-diagonal-alpha-source-v02.png",
+      "visualDescription": "Sparser gold filaments only (less decoration than v01) sweeping diagonally from bottom-left to top-right on a transparent background.",
+      "recommendedUse": "Minimal editorial framing and quiet light or dark backgrounds."
     }
   ],
   "gallery": {
@@ -270,7 +510,8 @@
         "hasAlpha": false,
         "visualDescription": "Hero signature ribbon sweeping diagonally from bottom-left to top-right on a baked dark background (largest PNG master, 49.6 MB).",
         "recommendedUse": "High-resolution print/poster master and source for web crops.",
-        "avoidUse": "Direct web delivery (49.6 MB)."
+        "avoidUse": "Direct web delivery (49.6 MB).",
+        "preferredAlternative": "web/signature-diagonal-dark-web-v01.webp"
       },
       {
         "path": "gallery/signature-diagonal-dark-master-v02.png",
@@ -359,7 +600,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Signature ribbon sweeping diagonally from bottom-left to top-right on a transparent background.",
-        "recommendedUse": "Hero sections, report covers, and presentation openers over custom dark or light grounds (convert to WebP for web)."
+        "recommendedUse": "Hero sections, report covers, and presentation openers over custom dark or light grounds (convert to WebP for web).",
+        "preferredAlternative": "web/signature-diagonal-alpha-web-v01.webp"
       },
       {
         "path": "gallery/signature-horizontal-alpha-source-v01.png",
@@ -373,7 +615,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Signature ribbon in a shallow horizontal current on a transparent background.",
-        "recommendedUse": "Banners, section dividers, and wide footers (convert to WebP for web)."
+        "recommendedUse": "Banners, section dividers, and wide footers (convert to WebP for web).",
+        "preferredAlternative": "web/signature-horizontal-alpha-web-v01.webp"
       },
       {
         "path": "gallery/signature-vertical-alpha-source-v01.png",
@@ -387,7 +630,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Signature ribbon in a vertical portrait cascade on a transparent background.",
-        "recommendedUse": "Portrait report covers, side panels, and vertical document margins (convert to WebP for web)."
+        "recommendedUse": "Portrait report covers, side panels, and vertical document margins (convert to WebP for web).",
+        "preferredAlternative": "web/signature-vertical-alpha-web-v01.webp"
       },
       {
         "path": "gallery/signature-open-arc-alpha-source-v01.png",
@@ -401,7 +645,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Signature ribbon forming an open organic C-shaped arc with a clear centre on a transparent background.",
-        "recommendedUse": "Framing a key metric, statement, or focal callout (convert to WebP for web)."
+        "recommendedUse": "Framing a key metric, statement, or focal callout (convert to WebP for web).",
+        "preferredAlternative": "web/signature-open-arc-alpha-web-v01.webp"
       },
       {
         "path": "gallery/signature-corner-alpha-source-v01.png",
@@ -415,7 +660,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Compact signature ribbon flourish anchored to the bottom-right corner on a transparent background.",
-        "recommendedUse": "Subtle page or slide corner accent leaving most of the layout clear (convert to WebP for web)."
+        "recommendedUse": "Subtle page or slide corner accent leaving most of the layout clear (convert to WebP for web).",
+        "preferredAlternative": "web/signature-corner-alpha-web-v01.webp"
       },
       {
         "path": "gallery/signature-convergence-alpha-source-v01.png",
@@ -429,7 +675,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Signature ribbon with three horizontal streams converging smoothly into one outgoing flow on a transparent background.",
-        "recommendedUse": "Partnership, integration, and telecoms adoption themes (convert to WebP for web)."
+        "recommendedUse": "Partnership, integration, and telecoms adoption themes (convert to WebP for web).",
+        "preferredAlternative": "web/signature-convergence-alpha-web-v01.webp"
       },
       {
         "path": "gallery/quiet-vertical-alpha-source-v01.png",
@@ -443,7 +690,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Quiet ribbon (no gold filaments) in a vertical cascade on a transparent background.",
-        "recommendedUse": "Everyday portrait documents, side columns, and content slides where copy leads."
+        "recommendedUse": "Everyday portrait documents, side columns, and content slides where copy leads.",
+        "preferredAlternative": "web/quiet-vertical-alpha-web-v01.webp"
       },
       {
         "path": "gallery/quiet-horizontal-alpha-source-v01.png",
@@ -457,7 +705,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Quiet ribbon (no gold filaments) in a horizontal flow on a transparent background.",
-        "recommendedUse": "Low-visual-weight section dividers, slide headers, and footers."
+        "recommendedUse": "Low-visual-weight section dividers, slide headers, and footers.",
+        "preferredAlternative": "web/quiet-horizontal-alpha-web-v01.webp"
       },
       {
         "path": "gallery/quiet-open-arc-alpha-source-v01.png",
@@ -471,7 +720,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Quiet ribbon (no gold filaments) forming an open C-shaped arc on a transparent background.",
-        "recommendedUse": "Restrained framing around callouts or editorial stats."
+        "recommendedUse": "Restrained framing around callouts or editorial stats.",
+        "preferredAlternative": "web/quiet-open-arc-alpha-web-v01.webp"
       },
       {
         "path": "gallery/quiet-convergence-alpha-source-v01.png",
@@ -485,7 +735,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Quiet ribbon (no gold filaments) with three horizontal streams merging into one on a transparent background.",
-        "recommendedUse": "Supporting slides and diagrams for alignment and adoption workflows."
+        "recommendedUse": "Supporting slides and diagrams for alignment and adoption workflows.",
+        "preferredAlternative": "web/quiet-convergence-alpha-web-v01.webp"
       },
       {
         "path": "gallery/quiet-diagonal-alpha-source-v01.png",
@@ -499,7 +750,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Quiet ribbon (no gold filaments) sweeping diagonally from bottom-left to top-right on a transparent background.",
-        "recommendedUse": "Subtle supporting hero or section background where text dominates."
+        "recommendedUse": "Subtle supporting hero or section background where text dominates.",
+        "preferredAlternative": "web/quiet-diagonal-alpha-web-v01.webp"
       },
       {
         "path": "gallery/quiet-corner-alpha-source-v01.png",
@@ -513,7 +765,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Compact quiet ribbon (no gold filaments) in a small bottom-right diagonal corner flourish on a transparent background.",
-        "recommendedUse": "Lightweight corner accent for everyday slides and white or dark documents."
+        "recommendedUse": "Lightweight corner accent for everyday slides and white or dark documents.",
+        "preferredAlternative": "web/quiet-corner-alpha-web-v01.webp"
       },
       {
         "path": "gallery/gold-diagonal-alpha-source-v01.png",
@@ -527,7 +780,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Gold filaments only (no solid ribbons) sweeping diagonally from bottom-left to top-right on a transparent background.",
-        "recommendedUse": "Open, airy framing and document/slide backgrounds."
+        "recommendedUse": "Open, airy framing and document/slide backgrounds.",
+        "preferredAlternative": "web/gold-diagonal-alpha-web-v01.webp"
       },
       {
         "path": "gallery/gold-diagonal-alpha-source-v02.png",
@@ -541,7 +795,8 @@
         "surface": "alpha",
         "hasAlpha": true,
         "visualDescription": "Sparser gold filaments only (less decoration than v01) sweeping diagonally from bottom-left to top-right on a transparent background.",
-        "recommendedUse": "Minimal editorial framing and quiet light or dark backgrounds."
+        "recommendedUse": "Minimal editorial framing and quiet light or dark backgrounds.",
+        "preferredAlternative": "web/gold-diagonal-alpha-web-v02.webp"
       }
     ]
   }
