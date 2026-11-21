@@ -4,6 +4,55 @@
     yearEl.textContent = String(new Date().getFullYear());
   }
 
+  /* Dark / Light mode toggle with system preference + persistence */
+  const root = document.documentElement;
+  const themeBtn = document.querySelector('[data-theme-toggle]');
+  const themeLabel = document.querySelector('[data-theme-label]');
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+  const colorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const applyTheme = (theme, persist = false) => {
+    const isDark = theme === 'dark';
+    root.dataset.theme = theme;
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', isDark ? '#102e2c' : '#ffffff');
+    }
+    if (themeBtn) {
+      themeBtn.setAttribute('aria-pressed', String(isDark));
+      themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    if (themeLabel) {
+      themeLabel.textContent = isDark ? 'Light' : 'Dark';
+    }
+    if (persist) {
+      try {
+        localStorage.setItem('ic-theme', theme);
+      } catch {
+        /* Storage unavailable in restricted contexts */
+      }
+    }
+  };
+
+  applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+    });
+  }
+
+  colorSchemeMedia.addEventListener('change', (event) => {
+    try {
+      if (!localStorage.getItem('ic-theme')) {
+        applyTheme(event.matches ? 'dark' : 'light');
+      }
+    } catch {
+      applyTheme(event.matches ? 'dark' : 'light');
+    }
+  });
+
+  /* Mobile navigation */
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-site-nav]');
   if (toggle && nav) {
