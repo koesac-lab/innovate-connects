@@ -27,6 +27,29 @@ jobs:
       - name: Assemble and validate site
         run: python3 tools/build_pages.py
 
+      - name: Verify Concept 3 perspective deep link
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class PerspectiveTarget(HTMLParser):
+              count = 0
+
+              def handle_starttag(self, tag, attrs):
+                  if ('id', 'perspective') in attrs:
+                      self.count += 1
+
+          page = Path('_site/concept-two/concept-three/index.html')
+          if not page.is_file():
+              raise SystemExit(f'Missing published page: {page}')
+          parser = PerspectiveTarget()
+          parser.feed(page.read_text(encoding='utf-8'))
+          parser.close()
+          if parser.count != 1:
+              raise SystemExit(f'{page}: expected exactly one #perspective target, found {parser.count}')
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
