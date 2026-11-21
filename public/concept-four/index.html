@@ -1,12 +1,24 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#eaf3ef">
+  <meta name="theme-color" content="#eaf3ef" data-theme-color>
   <meta name="description" content="Innovate Connects is a UK telecoms adoption consultancy helping public and private-sector organisations turn emerging connectivity into measurable adoption.">
   <title>Innovate Connects — What’s worth connecting?</title>
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('ic-concept4-theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved === 'dark' || saved === 'light' ? saved : (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        const meta = document.querySelector('meta[data-theme-color]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#171b1d' : '#eaf3ef');
+      } catch {}
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
@@ -23,9 +35,16 @@
         <span class="brand-name">Innovate Connects</span>
       </a>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
-        <span class="menu-toggle-label">Menu</span>
-      </button>
+      <div class="header-controls">
+        <div class="theme-switch" role="group" aria-label="Colour theme">
+          <button class="theme-option" type="button" data-theme-set="light" aria-pressed="true">Light</button>
+          <button class="theme-option" type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+          <span class="menu-toggle-label">Menu</span>
+        </button>
+      </div>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-site-nav>
         <a href="#gap">The challenge</a>
@@ -63,11 +82,11 @@
                 <path d="M162 135H304"/>
                 <path d="M162 224H196C244 224 238 135 282 135"/>
               </g>
-              <circle cx="162" cy="46" r="4.5" fill="#eaf3ef"/>
-              <circle cx="162" cy="135" r="4.5" fill="#eaf3ef"/>
-              <circle cx="162" cy="224" r="4.5" fill="#eaf3ef"/>
+              <circle cx="162" cy="46" r="4.5" fill="#f4ecdc"/>
+              <circle cx="162" cy="135" r="4.5" fill="#f4ecdc"/>
+              <circle cx="162" cy="224" r="4.5" fill="#f4ecdc"/>
               <circle class="lens-node" cx="306" cy="135" r="8" fill="#c49b4c"/>
-              <g fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="600">
+              <g fill="#f4ecdc" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="600">
                 <text x="6" y="42">Network evidence</text>
                 <text x="6" y="131">Policy constraints</text>
                 <text x="6" y="220">User needs</text>
@@ -90,7 +109,7 @@
       </div>
     </section>
 
-    <section class="band band-chalk" id="gap" aria-labelledby="gap-heading">
+    <section class="band band-surface" id="gap" aria-labelledby="gap-heading">
       <div class="container">
         <div class="split-head">
           <h2 id="gap-heading">Infrastructure is only half the work.</h2>
@@ -118,7 +137,7 @@
       </div>
     </section>
 
-    <section class="band band-mist" id="process" aria-labelledby="process-heading">
+    <section class="band band-canvas" id="process" aria-labelledby="process-heading">
       <div class="container">
         <div class="split-head">
           <h2 id="process-heading">Four steps from evidence to adoption.</h2>
@@ -198,7 +217,7 @@
       </div>
     </section>
 
-    <section class="band band-chalk" id="perspectives" aria-labelledby="perspectives-heading">
+    <section class="band band-surface" id="perspectives" aria-labelledby="perspectives-heading">
       <div class="container">
         <div class="split-head">
           <h2 id="perspectives-heading">Perspectives on adoption.</h2>

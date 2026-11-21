@@ -1,4 +1,44 @@
 (() => {
+  const THEME_STORAGE_KEY = 'ic-concept4-theme';
+  const themeButtons = document.querySelectorAll('[data-theme-set]');
+  const themeColorMeta = document.querySelector('meta[data-theme-color]');
+  const colorSchemeMedia = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+  function applyTheme(theme, persist = false) {
+    const resolved = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = resolved;
+
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', resolved === 'dark' ? '#171b1d' : '#eaf3ef');
+    }
+
+    themeButtons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.themeSet === resolved));
+    });
+
+    if (persist) {
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, resolved);
+      } catch {}
+    }
+  }
+
+  const initialTheme = document.documentElement.dataset.theme || (colorSchemeMedia && colorSchemeMedia.matches ? 'dark' : 'light');
+  applyTheme(initialTheme, false);
+
+  themeButtons.forEach((button) => {
+    button.addEventListener('click', () => applyTheme(button.dataset.themeSet, true));
+  });
+
+  if (colorSchemeMedia && typeof colorSchemeMedia.addEventListener === 'function') {
+    colorSchemeMedia.addEventListener('change', (event) => {
+      try {
+        if (localStorage.getItem(THEME_STORAGE_KEY)) return;
+      } catch {}
+      applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  }
+
   const scenarios = {
     health: {
       network: 'Mobile + satellite mix',
