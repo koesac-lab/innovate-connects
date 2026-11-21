@@ -89,7 +89,7 @@
 
     --gutter: clamp(1.25rem, 5vw, 5.5rem);
     --container-max: 82rem;
-    --band-space: clamp(4.75rem, 9.5vw, 8.75rem);
+    --band-space: clamp(3.75rem, 8.5vw, 8.75rem);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -175,14 +175,14 @@
   }
 
   h1 {
-    font-size: clamp(2.9rem, 5.5vw, 5.5rem);
+    font-size: clamp(2.75rem, 5.5vw, 5.5rem);
     line-height: 0.97;
     letter-spacing: -0.052em;
     max-width: 11.5ch;
   }
 
   h2 {
-    font-size: clamp(2.15rem, 3.85vw, 3.6rem);
+    font-size: clamp(2.05rem, 3.85vw, 3.6rem);
     line-height: 1.03;
     max-width: 16ch;
   }
@@ -307,58 +307,58 @@
     pointer-events: none;
   }
 
-  /* Perspective: quiet-open-arc framing the editorial thesis */
+  /* Perspective: signature-open-arc framing the editorial thesis */
   .ribbon-stage--perspective {
-    top: -6%;
-    right: -14%;
+    top: -4%;
+    right: -10%;
     width: clamp(28rem, 56vw, 62rem);
-    opacity: 0.42;
-    filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.32));
+    opacity: 0.56;
+    filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.34));
   }
 
-  /* Practice: quiet-horizontal beneath the left intro column */
+  /* Practice: signature-horizontal beneath the left intro column */
   .practice__ribbon {
-    margin-top: clamp(1.5rem, 4vw, 3.25rem);
-    width: min(100%, 27rem);
+    margin-top: clamp(1.5rem, 4vw, 3rem);
+    width: min(100%, 30rem);
     pointer-events: none;
   }
 
   .practice__ribbon img {
-    opacity: 0.94;
+    opacity: 1;
     filter: drop-shadow(0 18px 30px rgba(16, 46, 44, 0.16));
   }
 
   :root[data-theme="dark"] .practice__ribbon img {
-    opacity: 0.85;
+    opacity: 0.94;
     filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.45));
   }
 
-  /* Approach: quiet-convergence (three streams merging into one) behind the 4-stage pathway */
+  /* Approach: signature-convergence (three streams merging into one) */
   .ribbon-stage--approach {
-    bottom: -18%;
-    left: -10%;
-    width: clamp(34rem, 72vw, 76rem);
-    opacity: 0.3;
+    bottom: -14%;
+    left: -8%;
+    width: clamp(34rem, 74vw, 76rem);
+    opacity: 0.44;
   }
 
-  /* Insights: quiet-corner anchored cleanly to the bottom-right corner */
+  /* Insights: signature-corner anchored cleanly to the bottom-right corner */
   .ribbon-stage--insights {
-    bottom: -6%;
-    right: -4%;
-    width: clamp(18rem, 32vw, 34rem);
-    opacity: 0.55;
+    bottom: -4%;
+    right: -3%;
+    width: clamp(18rem, 34vw, 36rem);
+    opacity: 0.72;
   }
 
   :root[data-theme="dark"] .ribbon-stage--insights {
-    opacity: 0.38;
+    opacity: 0.56;
   }
 
   /* Contact: gold-diagonal filaments rising across the dark petrol finale */
   .ribbon-stage--contact {
-    bottom: -16%;
-    left: -12%;
+    bottom: -14%;
+    left: -10%;
     width: clamp(30rem, 58vw, 60rem);
-    opacity: 0.42;
+    opacity: 0.54;
   }
 }
 
@@ -514,7 +514,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.95rem;
+    min-height: 3rem;
     padding: 0.72rem 1.45rem;
     border: 1px solid transparent;
     border-radius: 2px;
@@ -596,7 +596,7 @@
   }
 
   :root[data-theme="dark"] .hero__media img {
-    opacity: 0.88;
+    opacity: 0.92;
     filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
   }
 
@@ -675,7 +675,7 @@
   }
 
   .diagnostic {
-    margin-top: clamp(3.5rem, 6vw, 5.5rem);
+    margin-top: clamp(3rem, 6vw, 5.5rem);
     padding-top: 2.25rem;
     border-top: 1px solid var(--ic-line-dark);
   }
@@ -711,7 +711,7 @@
   .practice__layout {
     display: grid;
     grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-    gap: clamp(2.5rem, 6vw, 6.5rem);
+    gap: clamp(2.25rem, 6vw, 6.5rem);
     align-items: start;
   }
 
@@ -739,7 +739,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    padding-block: 1.55rem;
+    padding-block: 1.45rem;
     list-style: none;
     cursor: pointer;
   }
@@ -894,7 +894,7 @@
   .report-plate__art {
     position: absolute;
     inset: 0;
-    opacity: 0.36;
+    opacity: 0.44;
     pointer-events: none;
   }
 
@@ -909,7 +909,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(16, 46, 44, 0.22) 0%, rgba(16, 46, 44, 0.94) 78%);
+    background: linear-gradient(180deg, rgba(16, 46, 44, 0.16) 0%, rgba(16, 46, 44, 0.92) 78%);
   }
 
   .report-plate__content {
@@ -1114,7 +1114,7 @@
     font-size: 0.88rem;
   }
 
-  /* Responsive */
+  /* Responsive & mobile-first ribbon showcase */
   @media (max-width: 1020px) {
     .hero__media,
     .hero__content {
@@ -1123,18 +1123,19 @@
 
     .hero__content {
       grid-row: 1;
-      padding-top: 2.75rem;
-      padding-bottom: 1.75rem;
+      padding-top: 2.5rem;
+      padding-bottom: 1rem;
     }
 
     .hero__media {
       grid-row: 2;
+      margin-top: -0.75rem;
     }
 
     .hero__media img {
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 10;
       object-fit: cover;
-      object-position: 68% 58%;
+      object-position: 62% 52%;
     }
 
     .pathway {
@@ -1144,11 +1145,6 @@
     .insights__grid,
     .contact__layout {
       grid-template-columns: 1fr;
-    }
-
-    .ribbon-stage--perspective {
-      opacity: 0.25;
-      right: -25%;
     }
   }
 
@@ -1189,14 +1185,47 @@
       grid-template-columns: 1fr;
     }
 
+    /* Make ribbon assets bold, unmistakable visual moments on mobile */
+    .ribbon-stage--perspective {
+      top: -2%;
+      right: -18%;
+      width: min(115vw, 34rem);
+      opacity: 0.62;
+    }
+
     .practice__ribbon {
-      max-width: 18rem;
+      width: calc(100% + (var(--gutter) * 2));
+      max-width: none;
+      margin-inline: calc(var(--gutter) * -1);
       margin-top: 1.25rem;
     }
 
+    .ribbon-stage--approach {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      width: 100%;
+      margin-bottom: -1.5rem;
+      opacity: 0.92;
+    }
+
+    .approach {
+      padding-top: 2rem;
+    }
+
     .ribbon-stage--insights {
-      opacity: 0.3;
-      width: 16rem;
+      bottom: -2%;
+      right: -6%;
+      width: min(85vw, 24rem);
+      opacity: 0.72;
+    }
+
+    .ribbon-stage--contact {
+      top: -6%;
+      bottom: auto;
+      left: -14%;
+      width: min(125vw, 36rem);
+      opacity: 0.62;
     }
   }
 
@@ -1206,7 +1235,7 @@
     }
 
     .report-plate {
-      min-height: 22rem;
+      min-height: 21rem;
     }
 
     .theme-toggle {
@@ -1217,6 +1246,14 @@
     .menu-toggle {
       padding: 0.42rem 0.68rem;
       font-size: 0.82rem;
+    }
+
+    .hero__actions {
+      gap: 1rem 1.4rem;
+    }
+
+    .hero__actions .button {
+      width: 100%;
     }
   }
 
