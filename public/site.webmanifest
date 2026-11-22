@@ -1,0 +1,14 @@
+{
+  "name": "Innovate Connects",
+  "short_name": "ICONS",
+  "theme_color": "#102e2c",
+  "background_color": "#171b1d",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
