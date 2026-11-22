@@ -198,24 +198,6 @@ def index_gallery():
     print(f"Indexed {len(assets)} gallery assets.")
 
 
-def promote_concept_art():
-    art = SITE / "concept-two" / "assets" / "art"
-    for name in ("report-flow", "workshop-flow"):
-        source = ROOT / "docs" / "assets" / "art" / f"{name}.svg"
-        shutil.copy2(source, art / f"{name}-concept-one.svg")
-    index = SITE / "concept-two" / "index.html"
-    html = index.read_text(encoding="utf-8")
-    swaps = (
-        ('src="assets/art/report-flow.webp"', 'src="assets/art/report-flow-concept-one.svg"'),
-        ('class="art-object art-object--workshop" src="assets/art/workshop-flow.webp"', 'class="art-object art-object--workshop" src="assets/art/workshop-flow-concept-one.svg"'),
-    )
-    for before, after in swaps:
-        if html.count(before) != 1:
-            raise SystemExit(f"Expected exactly one concept-two image reference: {before}")
-        html = html.replace(before, after, 1)
-    index.write_text(html, encoding="utf-8")
-
-
 def polish_brand_direction():
     page = SITE / "concept-two" / "brand-direction.html"
     html = page.read_text(encoding="utf-8")
@@ -243,18 +225,17 @@ def build():
     shutil.copy2(ROOT / "docs" / "links.html", SITE / "index.html")
     (SITE / ".nojekyll").touch()
     (SITE / "showcase.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=concept-two/"><title>Innovate Connects</title><a href="concept-two/">Visit the current concept</a></html>\n', encoding="utf-8")
-    promote_concept_art()
     polish_brand_direction()
     index_gallery()
     for page in SITE.rglob("*.html"):
         html = page.read_text(encoding="utf-8")
         html = re.sub(r"<base\b[^>]*href\s*=\s*['\"]/innovate-connects/['\"][^>]*>", "", html, flags=re.I)
-        html = re.sub(r"(?<=[\"'(])/assets/", "assets/", html)
+        html = re.sub(r"(?<=[\"'(\s])/assets/", "assets/", html)
         html = html.replace('href="/"', 'href="./"').replace("href='/'", "href='./'")
         page.write_text(html, encoding="utf-8")
     for stylesheet in SITE.rglob("*.css"):
         css = stylesheet.read_text(encoding="utf-8")
-        css = re.sub(r"(?<=[\"'(])/assets/", "../", css)
+        css = re.sub(r"(?<=[\"'(\s])/assets/", "../", css)
         stylesheet.write_text(css, encoding="utf-8")
     for name in ("index.html", "concept-two/index.html", "concept-two/brand-direction.html", "concept-two/logo-ideas.html", "concept-two/art-lab.html", "concept-two/assets-gallery.html"):
         if not (SITE / name).is_file():

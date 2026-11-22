@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" fill="none">
+  <!-- Route 5: Flat Woven IC — C passes behind I at top, in front of I at bottom -->
+  <path d="M27.8 9.2A12.2 12.2 0 0 0 18.2 4.8C11.1 4.8 5.6 10.6 5.6 18C5.6 21.8 7.1 25.1 9.5 27.4" stroke="#f4ecdc" stroke-width="3.4" stroke-linecap="round" />
+  <rect x="14.2" y="4.8" width="3.8" height="26.4" rx="1.2" fill="#f4ecdc" />
+  <path d="M9.5 27.4A12.4 12.4 0 0 0 18.4 31.2A12.2 12.2 0 0 0 28.4 26.2" stroke="#f4ecdc" stroke-width="3.6" stroke-linecap="round" />
+  <path d="M12.6 29.6A12.4 12.4 0 0 0 19.6 31.1" stroke="#c49b4c" stroke-width="1.35" stroke-linecap="round" />
+</svg>
