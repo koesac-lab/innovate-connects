@@ -153,15 +153,12 @@
 
   setTopic(activeKey);
 
-  /* Smooth GPU-composited ribbon parallax and pathway filament */
+  /* Subtle scroll-only ribbon parallax, scroll-triggered Perspective rotation, and pathway filament */
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ribbonNodes = Array.from(document.querySelectorAll('[data-parallax]')).map((el) => ({
     el,
     speed: parseFloat(el.dataset.parallax || '0'),
-    driftX: parseFloat(el.dataset.driftX || '0'),
     rotate: parseFloat(el.dataset.rotate || '0'),
-    pointer: parseFloat(el.dataset.pointer || '0'),
-    currentX: 0,
     currentY: 0,
     currentR: 0
   }));
@@ -170,8 +167,6 @@
   const pathwayFill = document.querySelector('[data-pathway-fill]');
 
   if (!reducedMotion && (ribbonNodes.length > 0 || pathwayFill)) {
-    let pointerX = 0;
-    let pointerY = 0;
     let rafId = null;
 
     const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
@@ -179,31 +174,29 @@
     const updateFrame = () => {
       const vh = window.innerHeight || 900;
       const isCompact = window.innerWidth < 780;
-      const scaleFactor = isCompact ? 0.45 : 1;
+      const scaleFactor = isCompact ? 0.55 : 1;
       let needsAnotherFrame = false;
 
       ribbonNodes.forEach((item) => {
-        const rect = item.el.parentElement.getBoundingClientRect();
+        const host = item.el.closest('section') || item.el.parentElement;
+        const rect = host.getBoundingClientRect();
         const centerOffset = (rect.top + rect.height * 0.5 - vh * 0.5) / vh;
-        const progress = clamp(centerOffset, -1.25, 1.25);
+        const progress = clamp(centerOffset, -1.15, 1.15);
 
-        const targetY = progress * item.speed * 260 * scaleFactor + pointerY * item.pointer * scaleFactor;
-        const targetX = progress * item.driftX * scaleFactor + pointerX * item.pointer * scaleFactor;
-        const targetR = progress * item.rotate * scaleFactor;
+        const targetY = progress * item.speed * 180 * scaleFactor;
+        const targetR = progress * item.rotate;
 
-        item.currentX += (targetX - item.currentX) * 0.1;
-        item.currentY += (targetY - item.currentY) * 0.1;
-        item.currentR += (targetR - item.currentR) * 0.1;
+        item.currentY += (targetY - item.currentY) * 0.09;
+        item.currentR += (targetR - item.currentR) * 0.09;
 
         if (
-          Math.abs(targetX - item.currentX) > 0.08 ||
           Math.abs(targetY - item.currentY) > 0.08 ||
           Math.abs(targetR - item.currentR) > 0.02
         ) {
           needsAnotherFrame = true;
         }
 
-        item.el.style.transform = `translate3d(${item.currentX.toFixed(2)}px, ${item.currentY.toFixed(2)}px, 0) rotate(${item.currentR.toFixed(2)}deg)`;
+        item.el.style.transform = `translate3d(0, ${item.currentY.toFixed(2)}px, 0) rotate(${item.currentR.toFixed(2)}deg)`;
       });
 
       if (pathwaySection && pathwayFill) {
@@ -228,14 +221,6 @@
 
     window.addEventListener('scroll', requestTick, { passive: true });
     window.addEventListener('resize', requestTick, { passive: true });
-
-    if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
-      window.addEventListener('pointermove', (event) => {
-        pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
-        pointerY = (event.clientY / window.innerHeight - 0.5) * 2;
-        requestTick();
-      }, { passive: true });
-    }
 
     requestTick();
   }

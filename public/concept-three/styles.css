@@ -64,8 +64,8 @@
     /* Semantic light mode defaults */
     --surface-header: var(--ic-white);
     --surface-hero: var(--ic-white);
-    --hero-scrim: rgba(255, 255, 255, 0.86);
-    --hero-scrim-soft: rgba(255, 255, 255, 0.45);
+    --hero-scrim: rgba(255, 255, 255, 0.88);
+    --hero-scrim-soft: rgba(255, 255, 255, 0.38);
     --surface-perspective: var(--ic-petrol-ink);
     --surface-editorial: var(--ic-paper-soft);
     --surface-ink: var(--ic-ink);
@@ -101,8 +101,8 @@
 
     --surface-header: var(--ic-petrol-ink);
     --surface-hero: var(--ic-petrol-ink);
-    --hero-scrim: rgba(16, 46, 44, 0.84);
-    --hero-scrim-soft: rgba(16, 46, 44, 0.38);
+    --hero-scrim: rgba(16, 46, 44, 0.86);
+    --hero-scrim-soft: rgba(16, 46, 44, 0.36);
     --surface-perspective: var(--ic-ink);
     --surface-editorial: var(--ic-charcoal);
     --surface-ink: var(--ic-ink);
@@ -130,8 +130,8 @@
 
       --surface-header: var(--ic-petrol-ink);
       --surface-hero: var(--ic-petrol-ink);
-      --hero-scrim: rgba(16, 46, 44, 0.84);
-      --hero-scrim-soft: rgba(16, 46, 44, 0.38);
+      --hero-scrim: rgba(16, 46, 44, 0.86);
+      --hero-scrim-soft: rgba(16, 46, 44, 0.36);
       --surface-perspective: var(--ic-ink);
       --surface-editorial: var(--ic-charcoal);
       --surface-ink: var(--ic-ink);
@@ -298,6 +298,7 @@
   .ribbon-layer {
     will-change: transform;
     transform: translate3d(0, 0, 0);
+    transform-origin: center center;
   }
 
   .ribbon-layer img {
@@ -307,66 +308,69 @@
     -webkit-user-drag: none;
   }
 
-  .ribbon-stage {
+  /* Full-bleed atmospheric artwork stages — softly masked so edges dissolve into the surface */
+  .ribbon-bleed {
     position: absolute;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
+    display: flex;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
   }
 
-  /* Perspective: signature-open-arc centered cleanly inside the band, slowly rotating */
-  .ribbon-stage--perspective {
-    top: 12%;
-    right: -8%;
-    width: clamp(24rem, 48vw, 52rem);
-    opacity: 0.54;
-    filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.34));
+  /* Perspective: full-bleed open-arc sweeping across the right half with subtle scroll rotation */
+  .ribbon-bleed--perspective {
+    align-items: center;
+    justify-content: flex-end;
   }
 
-  .ribbon-orbit {
-    transform-origin: center center;
-    animation: slowOrbit 72s linear infinite;
+  .ribbon-bleed--perspective .ribbon-layer {
+    width: clamp(32rem, 62vw, 66rem);
+    margin-right: clamp(-10rem, -10vw, -4rem);
+    opacity: 0.42;
   }
 
-  @keyframes slowOrbit {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  /* Practice: restrained full-bleed horizontal quiet ribbon dissolving softly into the paper/charcoal ground */
+  .ribbon-bleed--practice {
+    align-items: flex-end;
+    justify-content: flex-start;
   }
 
-  /* Practice: compact signature-horizontal inside the intro column, well clear of section seams */
-  .practice__ribbon {
-    margin-top: clamp(0.9rem, 2.5vw, 2rem);
-    width: min(100%, 26rem);
-    pointer-events: none;
+  .ribbon-bleed--practice .ribbon-layer {
+    width: 112%;
+    margin-left: -6%;
+    margin-bottom: -2%;
+    opacity: 0.22;
   }
 
-  .practice__ribbon img {
-    opacity: 0.96;
-    filter: drop-shadow(0 14px 24px rgba(16, 46, 44, 0.14));
+  :root[data-theme="dark"] .ribbon-bleed--practice .ribbon-layer {
+    opacity: 0.28;
   }
 
-  :root[data-theme="dark"] .practice__ribbon img {
-    opacity: 0.9;
-    filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.42));
+  /* Approach: full-bleed convergence streams sweeping horizontally behind the 4-stage pathway */
+  .ribbon-bleed--approach {
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Approach: signature-convergence framed cleanly between header and pathway (never touching section edges) */
-  .approach__ribbon {
-    width: min(100%, 44rem);
-    margin-block: clamp(0.5rem, 2vw, 1.5rem) clamp(1.25rem, 3vw, 2.25rem);
-    opacity: 0.92;
-    pointer-events: none;
+  .ribbon-bleed--approach .ribbon-layer {
+    width: 118%;
+    opacity: 0.34;
   }
 
-  /* Contact: gold-diagonal filaments anchored cleanly at bottom-left, far from Insights above */
-  .ribbon-stage--contact {
-    bottom: 2%;
-    left: -10%;
-    width: clamp(26rem, 52vw, 54rem);
-    opacity: 0.52;
+  /* Contact: full-bleed gold filaments sweeping diagonally across the dark petrol finale */
+  .ribbon-bleed--contact {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .ribbon-bleed--contact .ribbon-layer {
+    width: clamp(36rem, 78vw, 82rem);
+    margin-left: -10%;
+    margin-bottom: -4%;
+    opacity: 0.46;
   }
 }
 
@@ -578,10 +582,11 @@
     border-bottom-color: var(--ink-hover);
   }
 
-  /* Hero: unified single-frame composition across desktop and mobile */
+  /* Hero: full-bleed atmospheric ribbon woven behind the headline */
   .hero {
     position: relative;
     display: grid;
+    min-height: clamp(32rem, 62vw, 46rem);
     background-color: var(--surface-hero);
     isolation: isolate;
     overflow: hidden;
@@ -595,26 +600,43 @@
 
   .hero__media {
     position: relative;
-    align-self: end;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     width: 100%;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+  }
+
+  .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      95deg,
+      var(--hero-scrim) 0%,
+      var(--hero-scrim-soft) 46%,
+      transparent 78%
+    );
     pointer-events: none;
   }
 
   .ribbon-layer--hero {
-    transform-origin: 70% 60%;
+    width: 108%;
+    margin-right: -4%;
   }
 
   :root[data-theme="dark"] .hero__media img {
-    opacity: 0.92;
-    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+    opacity: 0.9;
   }
 
   .hero__content {
     position: relative;
     z-index: 2;
-    align-self: start;
-    padding-top: clamp(2.5rem, 6vw, 6.25rem);
-    padding-bottom: clamp(2.5rem, 6vw, 5.25rem);
+    align-self: center;
+    padding-block: clamp(3rem, 6vw, 5.5rem);
   }
 
   .hero__copy {
@@ -818,7 +840,7 @@
 
   /* Approach band */
   .approach__header {
-    margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
   .approach__header h2 {
@@ -907,7 +929,7 @@
   .report-plate__art {
     position: absolute;
     inset: 0;
-    opacity: 0.44;
+    opacity: 0.46;
     pointer-events: none;
   }
 
@@ -1127,41 +1149,24 @@
     font-size: 0.88rem;
   }
 
-  /* Responsive — unified hero, zero touching artworks, clean mobile rhythm */
+  /* Responsive */
   @media (max-width: 1020px) {
     .hero {
-      min-height: clamp(27rem, 72vw, 36rem);
-    }
-
-    .hero__media {
-      align-self: stretch;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
+      min-height: clamp(28rem, 76vw, 38rem);
     }
 
     .hero__media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
       background: linear-gradient(
         180deg,
         var(--hero-scrim) 0%,
-        var(--hero-scrim-soft) 52%,
+        var(--hero-scrim-soft) 58%,
         transparent 100%
       );
-      pointer-events: none;
     }
 
     .ribbon-layer--hero {
-      width: 130%;
-      margin-right: -12%;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero__content {
-      padding-top: 2.5rem;
-      padding-bottom: 3rem;
+      width: 145%;
+      margin-right: -18%;
     }
 
     .pathway {
@@ -1211,23 +1216,15 @@
       grid-template-columns: 1fr;
     }
 
-    .ribbon-stage--perspective {
-      top: 18%;
-      right: -22%;
-      width: min(92vw, 28rem);
-      opacity: 0.48;
+    .ribbon-bleed--perspective .ribbon-layer {
+      width: 120vw;
+      margin-right: -28vw;
+      opacity: 0.36;
     }
 
-    .practice__ribbon {
-      max-width: 22rem;
-      margin-top: 0.75rem;
-    }
-
-    .ribbon-stage--contact {
-      bottom: 4%;
-      left: -16%;
-      width: min(110vw, 32rem);
-      opacity: 0.48;
+    .ribbon-bleed--approach .ribbon-layer {
+      width: 155vw;
+      opacity: 0.3;
     }
   }
 
@@ -1264,8 +1261,7 @@
       scroll-behavior: auto;
     }
 
-    .hero__copy,
-    .ribbon-orbit {
+    .hero__copy {
       animation: none;
     }
 
