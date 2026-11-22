@@ -64,6 +64,8 @@
     /* Semantic light mode defaults */
     --surface-header: var(--ic-white);
     --surface-hero: var(--ic-white);
+    --hero-scrim: rgba(255, 255, 255, 0.86);
+    --hero-scrim-soft: rgba(255, 255, 255, 0.45);
     --surface-perspective: var(--ic-petrol-ink);
     --surface-editorial: var(--ic-paper-soft);
     --surface-ink: var(--ic-ink);
@@ -89,7 +91,7 @@
 
     --gutter: clamp(1.25rem, 5vw, 5.5rem);
     --container-max: 82rem;
-    --band-space: clamp(3.75rem, 8.5vw, 8.75rem);
+    --band-space: clamp(3.5rem, 7.5vw, 8rem);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -99,6 +101,8 @@
 
     --surface-header: var(--ic-petrol-ink);
     --surface-hero: var(--ic-petrol-ink);
+    --hero-scrim: rgba(16, 46, 44, 0.84);
+    --hero-scrim-soft: rgba(16, 46, 44, 0.38);
     --surface-perspective: var(--ic-ink);
     --surface-editorial: var(--ic-charcoal);
     --surface-ink: var(--ic-ink);
@@ -126,6 +130,8 @@
 
       --surface-header: var(--ic-petrol-ink);
       --surface-hero: var(--ic-petrol-ink);
+      --hero-scrim: rgba(16, 46, 44, 0.84);
+      --hero-scrim-soft: rgba(16, 46, 44, 0.38);
       --surface-perspective: var(--ic-ink);
       --surface-editorial: var(--ic-charcoal);
       --surface-ink: var(--ic-ink);
@@ -175,20 +181,20 @@
   }
 
   h1 {
-    font-size: clamp(2.75rem, 5.5vw, 5.5rem);
+    font-size: clamp(2.65rem, 5.5vw, 5.5rem);
     line-height: 0.97;
     letter-spacing: -0.052em;
     max-width: 11.5ch;
   }
 
   h2 {
-    font-size: clamp(2.05rem, 3.85vw, 3.6rem);
+    font-size: clamp(2rem, 3.85vw, 3.6rem);
     line-height: 1.03;
     max-width: 16ch;
   }
 
   h3 {
-    font-size: clamp(1.42rem, 2.15vw, 1.95rem);
+    font-size: clamp(1.38rem, 2.15vw, 1.95rem);
     line-height: 1.14;
     letter-spacing: -0.03em;
   }
@@ -307,58 +313,60 @@
     pointer-events: none;
   }
 
-  /* Perspective: signature-open-arc framing the editorial thesis */
+  /* Perspective: signature-open-arc centered cleanly inside the band, slowly rotating */
   .ribbon-stage--perspective {
-    top: -4%;
-    right: -10%;
-    width: clamp(28rem, 56vw, 62rem);
-    opacity: 0.56;
+    top: 12%;
+    right: -8%;
+    width: clamp(24rem, 48vw, 52rem);
+    opacity: 0.54;
     filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.34));
   }
 
-  /* Practice: signature-horizontal beneath the left intro column */
+  .ribbon-orbit {
+    transform-origin: center center;
+    animation: slowOrbit 72s linear infinite;
+  }
+
+  @keyframes slowOrbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Practice: compact signature-horizontal inside the intro column, well clear of section seams */
   .practice__ribbon {
-    margin-top: clamp(1.5rem, 4vw, 3rem);
-    width: min(100%, 30rem);
+    margin-top: clamp(0.9rem, 2.5vw, 2rem);
+    width: min(100%, 26rem);
     pointer-events: none;
   }
 
   .practice__ribbon img {
-    opacity: 1;
-    filter: drop-shadow(0 18px 30px rgba(16, 46, 44, 0.16));
+    opacity: 0.96;
+    filter: drop-shadow(0 14px 24px rgba(16, 46, 44, 0.14));
   }
 
   :root[data-theme="dark"] .practice__ribbon img {
-    opacity: 0.94;
-    filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.45));
+    opacity: 0.9;
+    filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.42));
   }
 
-  /* Approach: signature-convergence (three streams merging into one) */
-  .ribbon-stage--approach {
-    bottom: -14%;
-    left: -8%;
-    width: clamp(34rem, 74vw, 76rem);
-    opacity: 0.44;
+  /* Approach: signature-convergence framed cleanly between header and pathway (never touching section edges) */
+  .approach__ribbon {
+    width: min(100%, 44rem);
+    margin-block: clamp(0.5rem, 2vw, 1.5rem) clamp(1.25rem, 3vw, 2.25rem);
+    opacity: 0.92;
+    pointer-events: none;
   }
 
-  /* Insights: signature-corner anchored cleanly to the bottom-right corner */
-  .ribbon-stage--insights {
-    bottom: -4%;
-    right: -3%;
-    width: clamp(18rem, 34vw, 36rem);
-    opacity: 0.72;
-  }
-
-  :root[data-theme="dark"] .ribbon-stage--insights {
-    opacity: 0.56;
-  }
-
-  /* Contact: gold-diagonal filaments rising across the dark petrol finale */
+  /* Contact: gold-diagonal filaments anchored cleanly at bottom-left, far from Insights above */
   .ribbon-stage--contact {
-    bottom: -14%;
+    bottom: 2%;
     left: -10%;
-    width: clamp(30rem, 58vw, 60rem);
-    opacity: 0.54;
+    width: clamp(26rem, 52vw, 54rem);
+    opacity: 0.52;
   }
 }
 
@@ -500,7 +508,7 @@
   }
 
   .section-label {
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
     color: var(--ink-accent);
     font-size: 0.92rem;
     font-weight: 500;
@@ -570,7 +578,7 @@
     border-bottom-color: var(--ink-hover);
   }
 
-  /* Hero */
+  /* Hero: unified single-frame composition across desktop and mobile */
   .hero {
     position: relative;
     display: grid;
@@ -586,6 +594,7 @@
   }
 
   .hero__media {
+    position: relative;
     align-self: end;
     width: 100%;
     pointer-events: none;
@@ -605,7 +614,7 @@
     z-index: 2;
     align-self: start;
     padding-top: clamp(2.5rem, 6vw, 6.25rem);
-    padding-bottom: clamp(2.25rem, 6vw, 5.25rem);
+    padding-bottom: clamp(2.5rem, 6vw, 5.25rem);
   }
 
   .hero__copy {
@@ -614,14 +623,14 @@
   }
 
   .hero__kicker {
-    margin-bottom: 1.15rem;
+    margin-bottom: 1.05rem;
     color: var(--ink-accent);
     font-size: 0.95rem;
     font-weight: 500;
   }
 
   .hero__lede {
-    margin-top: 1.35rem;
+    margin-top: 1.25rem;
     max-width: 39ch;
     color: var(--ink-secondary);
     font-size: clamp(1.02rem, 1.25vw, 1.18rem);
@@ -651,7 +660,7 @@
   .editorial-split {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 6rem);
+    gap: clamp(1.75rem, 5vw, 6rem);
     align-items: start;
   }
 
@@ -661,40 +670,40 @@
 
   .editorial-split__body {
     display: grid;
-    gap: 1.25rem;
-    padding-top: 0.35rem;
+    gap: 1.15rem;
+    padding-top: 0.25rem;
     color: var(--ic-muted-dark);
   }
 
   .lede-copy {
     color: var(--ic-paper);
     font-family: var(--ic-serif);
-    font-size: clamp(1.22rem, 1.6vw, 1.48rem);
+    font-size: clamp(1.2rem, 1.6vw, 1.48rem);
     line-height: 1.54;
     letter-spacing: -0.015em;
   }
 
   .diagnostic {
-    margin-top: clamp(3rem, 6vw, 5.5rem);
-    padding-top: 2.25rem;
+    margin-top: clamp(2.5rem, 5vw, 5rem);
+    padding-top: 2rem;
     border-top: 1px solid var(--ic-line-dark);
   }
 
   .diagnostic__heading {
-    margin-bottom: 2rem;
-    font-size: clamp(1.35rem, 1.9vw, 1.75rem);
+    margin-bottom: 1.65rem;
+    font-size: clamp(1.32rem, 1.9vw, 1.75rem);
     color: var(--ic-paper);
   }
 
   .diagnostic__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.75rem, 4vw, 3.5rem);
+    gap: clamp(1.5rem, 3.5vw, 3.25rem);
   }
 
   .diagnostic__item {
     display: grid;
-    gap: 0.6rem;
+    gap: 0.5rem;
     align-content: start;
   }
 
@@ -704,20 +713,24 @@
 
   .diagnostic__item p {
     color: var(--ic-muted-dark);
-    font-size: 0.97rem;
+    font-size: 0.96rem;
   }
 
-  /* Practice band */
+  /* Practice band — tightened editorial spacing */
+  .practice {
+    padding-block: clamp(3rem, 6.5vw, 6.75rem);
+  }
+
   .practice__layout {
     display: grid;
     grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-    gap: clamp(2.25rem, 6vw, 6.5rem);
+    gap: clamp(1.5rem, 4.5vw, 5.5rem);
     align-items: start;
   }
 
   .practice__intro {
     display: grid;
-    gap: 1.2rem;
+    gap: 0.85rem;
     justify-items: start;
   }
 
@@ -738,8 +751,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding-block: 1.45rem;
+    gap: 1.25rem;
+    padding-block: 1.1rem;
     list-style: none;
     cursor: pointer;
   }
@@ -750,7 +763,7 @@
 
   .practice-item__title {
     font-family: var(--ic-serif);
-    font-size: clamp(1.45rem, 2.2vw, 2rem);
+    font-size: clamp(1.38rem, 2.1vw, 1.9rem);
     line-height: 1.14;
     letter-spacing: -0.03em;
     color: var(--ink-primary);
@@ -764,8 +777,8 @@
   .practice-item__toggle {
     position: relative;
     flex-shrink: 0;
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.05rem;
+    height: 1.05rem;
   }
 
   .practice-item__toggle::before,
@@ -791,21 +804,21 @@
 
   .practice-item__body {
     display: grid;
-    gap: 0.9rem;
-    padding-bottom: 1.75rem;
+    gap: 0.65rem;
+    padding-bottom: 1.25rem;
     color: var(--ink-secondary);
   }
 
   .practice-item__outcome {
-    padding-left: 1rem;
+    padding-left: 0.9rem;
     border-left: 2px solid var(--ink-accent);
     color: var(--ink-primary);
-    font-size: 0.96rem;
+    font-size: 0.95rem;
   }
 
   /* Approach band */
   .approach__header {
-    margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
+    margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
   }
 
   .approach__header h2 {
@@ -816,7 +829,7 @@
   .pathway-track {
     position: relative;
     height: 2px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     background-color: var(--ic-line-dark);
     overflow: hidden;
   }
@@ -834,14 +847,14 @@
   .pathway {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(1.75rem, 3vw, 2.75rem);
+    gap: clamp(1.5rem, 3vw, 2.75rem);
     padding: 0;
     list-style: none;
   }
 
   .pathway__step {
     display: grid;
-    gap: 0.75rem;
+    gap: 0.6rem;
     align-content: start;
   }
 
@@ -868,13 +881,13 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 1.25rem 2rem;
-    margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
+    margin-bottom: clamp(2rem, 4vw, 3.25rem);
   }
 
   .insights__grid {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
+    gap: clamp(1.75rem, 5vw, 4.5rem);
     align-items: stretch;
   }
 
@@ -883,8 +896,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-height: 27rem;
-    padding: clamp(2rem, 4vw, 3.25rem);
+    min-height: 26rem;
+    padding: clamp(1.75rem, 4vw, 3.25rem);
     background-color: var(--surface-plate);
     color: var(--ic-paper);
     border: 1px solid var(--border-subtle);
@@ -916,7 +929,7 @@
     position: relative;
     z-index: 1;
     display: grid;
-    gap: 1rem;
+    gap: 0.9rem;
     justify-items: start;
   }
 
@@ -927,7 +940,7 @@
   }
 
   .report-plate h3 {
-    font-size: clamp(1.85rem, 2.8vw, 2.55rem);
+    font-size: clamp(1.75rem, 2.8vw, 2.55rem);
     color: var(--ic-paper);
     max-width: 15ch;
   }
@@ -938,7 +951,7 @@
   }
 
   .report-plate .button {
-    margin-top: 0.6rem;
+    margin-top: 0.5rem;
   }
 
   .insights__list {
@@ -948,9 +961,9 @@
 
   .insight-entry {
     display: grid;
-    gap: 0.75rem;
+    gap: 0.65rem;
     justify-items: start;
-    padding-block: 1.75rem;
+    padding-block: 1.5rem;
     border-top: 1px solid var(--border-strong);
   }
 
@@ -973,13 +986,13 @@
   .contact__layout {
     display: grid;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
+    gap: clamp(2rem, 5vw, 6rem);
     align-items: start;
   }
 
   .contact__lead {
     display: grid;
-    gap: 1.25rem;
+    gap: 1.1rem;
   }
 
   .contact__lead h2 {
@@ -996,10 +1009,10 @@
 
   .brief-starter {
     display: grid;
-    gap: 1.35rem;
-    padding: clamp(1.5rem, 3vw, 2.25rem);
+    gap: 1.25rem;
+    padding: clamp(1.35rem, 3vw, 2.25rem);
     border: 1px solid var(--ic-line-dark);
-    background-color: rgba(23, 27, 29, 0.84);
+    background-color: rgba(23, 27, 29, 0.86);
   }
 
   .brief-starter__label {
@@ -1066,7 +1079,7 @@
     background-color: var(--surface-footer);
     color: var(--ic-muted-dark);
     border-top: 1px solid var(--ic-line-dark);
-    padding-block: 2.5rem;
+    padding-block: 2.25rem;
   }
 
   .site-footer__inner {
@@ -1114,28 +1127,41 @@
     font-size: 0.88rem;
   }
 
-  /* Responsive & mobile-first ribbon showcase */
+  /* Responsive — unified hero, zero touching artworks, clean mobile rhythm */
   @media (max-width: 1020px) {
-    .hero__media,
-    .hero__content {
-      grid-area: auto;
-    }
-
-    .hero__content {
-      grid-row: 1;
-      padding-top: 2.5rem;
-      padding-bottom: 1rem;
+    .hero {
+      min-height: clamp(27rem, 72vw, 36rem);
     }
 
     .hero__media {
-      grid-row: 2;
-      margin-top: -0.75rem;
+      align-self: stretch;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
     }
 
-    .hero__media img {
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      object-position: 62% 52%;
+    .hero__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        var(--hero-scrim) 0%,
+        var(--hero-scrim-soft) 52%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    .ribbon-layer--hero {
+      width: 130%;
+      margin-right: -12%;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero__content {
+      padding-top: 2.5rem;
+      padding-bottom: 3rem;
     }
 
     .pathway {
@@ -1185,47 +1211,23 @@
       grid-template-columns: 1fr;
     }
 
-    /* Make ribbon assets bold, unmistakable visual moments on mobile */
     .ribbon-stage--perspective {
-      top: -2%;
-      right: -18%;
-      width: min(115vw, 34rem);
-      opacity: 0.62;
+      top: 18%;
+      right: -22%;
+      width: min(92vw, 28rem);
+      opacity: 0.48;
     }
 
     .practice__ribbon {
-      width: calc(100% + (var(--gutter) * 2));
-      max-width: none;
-      margin-inline: calc(var(--gutter) * -1);
-      margin-top: 1.25rem;
-    }
-
-    .ribbon-stage--approach {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      width: 100%;
-      margin-bottom: -1.5rem;
-      opacity: 0.92;
-    }
-
-    .approach {
-      padding-top: 2rem;
-    }
-
-    .ribbon-stage--insights {
-      bottom: -2%;
-      right: -6%;
-      width: min(85vw, 24rem);
-      opacity: 0.72;
+      max-width: 22rem;
+      margin-top: 0.75rem;
     }
 
     .ribbon-stage--contact {
-      top: -6%;
-      bottom: auto;
-      left: -14%;
-      width: min(125vw, 36rem);
-      opacity: 0.62;
+      bottom: 4%;
+      left: -16%;
+      width: min(110vw, 32rem);
+      opacity: 0.48;
     }
   }
 
@@ -1235,7 +1237,7 @@
     }
 
     .report-plate {
-      min-height: 21rem;
+      min-height: 20rem;
     }
 
     .theme-toggle {
@@ -1249,7 +1251,7 @@
     }
 
     .hero__actions {
-      gap: 1rem 1.4rem;
+      gap: 0.9rem 1.4rem;
     }
 
     .hero__actions .button {
@@ -1262,7 +1264,8 @@
       scroll-behavior: auto;
     }
 
-    .hero__copy {
+    .hero__copy,
+    .ribbon-orbit {
       animation: none;
     }
 

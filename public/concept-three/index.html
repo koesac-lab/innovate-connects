@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..600;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" />
-  <link rel="stylesheet" href="styles.css?v=5" />
-  <script src="app.js?v=5" defer></script>
+  <link rel="stylesheet" href="styles.css?v=6" />
+  <script src="app.js?v=6" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -75,7 +75,7 @@
   <main id="main">
     <section class="hero" aria-labelledby="hero-headline">
       <div class="hero__media" aria-hidden="true">
-        <div class="ribbon-layer ribbon-layer--hero" data-parallax="0.14" data-pointer="14">
+        <div class="ribbon-layer ribbon-layer--hero" data-parallax="0.12" data-pointer="12">
           <img
             src="../assets/web/signature-diagonal-alpha-web-v01.webp"
             width="1672"
@@ -103,8 +103,9 @@
 
     <section class="band band--perspective perspective has-ribbon" id="perspective" aria-labelledby="perspective-heading">
       <div class="ribbon-stage ribbon-stage--perspective" aria-hidden="true">
-        <div class="ribbon-layer" data-parallax="-0.13" data-drift-x="22" data-rotate="3.5">
+        <div class="ribbon-layer" data-parallax="-0.1" data-drift-x="16">
           <img
+            class="ribbon-orbit"
             src="../assets/web/signature-open-arc-alpha-web-v01.webp"
             alt=""
             loading="lazy"
@@ -160,7 +161,7 @@
           <a class="text-link" href="#contact" data-topic-trigger="workshop">Scope an engagement</a>
 
           <div class="practice__ribbon" aria-hidden="true">
-            <div class="ribbon-layer" data-parallax="0.15" data-drift-x="-16" data-rotate="-3">
+            <div class="ribbon-layer" data-parallax="0.1" data-drift-x="-12" data-rotate="-2">
               <img
                 src="../assets/web/signature-horizontal-alpha-web-v01.webp"
                 alt=""
@@ -236,21 +237,21 @@
     </section>
 
     <section class="band band--ink approach has-ribbon" id="approach" aria-labelledby="approach-heading" data-pathway-section>
-      <div class="ribbon-stage ribbon-stage--approach" aria-hidden="true">
-        <div class="ribbon-layer" data-parallax="-0.11" data-drift-x="-24" data-rotate="2">
-          <img
-            src="../assets/web/signature-convergence-alpha-web-v01.webp"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
-
       <div class="container content-above">
         <div class="approach__header">
           <p class="section-label section-label--gold">How a programme moves</p>
           <h2 id="approach-heading">Four stages from early question to lasting adoption.</h2>
+        </div>
+
+        <div class="approach__ribbon" aria-hidden="true">
+          <div class="ribbon-layer" data-parallax="-0.08" data-drift-x="-16">
+            <img
+              src="../assets/web/signature-convergence-alpha-web-v01.webp"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
 
         <div class="pathway-track" aria-hidden="true">
@@ -283,17 +284,6 @@
     </section>
 
     <section class="band band--editorial insights has-ribbon" id="insights" aria-labelledby="insights-heading">
-      <div class="ribbon-stage ribbon-stage--insights" aria-hidden="true">
-        <div class="ribbon-layer" data-parallax="0.12" data-drift-x="16" data-rotate="-2.5">
-          <img
-            src="../assets/web/signature-corner-alpha-web-v01.webp"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
-
       <div class="container content-above">
         <div class="insights__header">
           <div>
@@ -343,7 +333,7 @@
 
     <section class="band band--contact contact has-ribbon" id="contact" aria-labelledby="contact-heading">
       <div class="ribbon-stage ribbon-stage--contact" aria-hidden="true">
-        <div class="ribbon-layer" data-parallax="-0.14" data-drift-x="-20" data-rotate="2">
+        <div class="ribbon-layer" data-parallax="-0.1" data-drift-x="-16" data-rotate="2">
           <img
             src="../assets/web/gold-diagonal-alpha-web-v02.webp"
             alt=""
