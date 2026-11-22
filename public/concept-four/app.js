@@ -1,15 +1,16 @@
 (() => {
-  const THEME_STORAGE_KEY = 'ic-concept4-theme';
+  // Theme switcher (Evening-Luxe Dark / Editorial Warm Paper Light)
+  const THEME_KEY = 'ic-concept4-theme';
   const themeButtons = document.querySelectorAll('[data-theme-set]');
-  const themeColorMeta = document.querySelector('meta[data-theme-color]');
-  const colorSchemeMedia = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  const themeMeta = document.querySelector('meta[data-theme-color]');
+  const lightMedia = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
 
   function applyTheme(theme, persist = false) {
-    const resolved = theme === 'dark' ? 'dark' : 'light';
+    const resolved = theme === 'light' ? 'light' : 'dark';
     document.documentElement.dataset.theme = resolved;
 
-    if (themeColorMeta) {
-      themeColorMeta.setAttribute('content', resolved === 'dark' ? '#171b1d' : '#eaf3ef');
+    if (themeMeta) {
+      themeMeta.setAttribute('content', resolved === 'light' ? '#f4ecdc' : '#171b1d');
     }
 
     themeButtons.forEach((button) => {
@@ -18,92 +19,35 @@
 
     if (persist) {
       try {
-        localStorage.setItem(THEME_STORAGE_KEY, resolved);
+        localStorage.setItem(THEME_KEY, resolved);
       } catch {}
     }
   }
 
-  const initialTheme = document.documentElement.dataset.theme || (colorSchemeMedia && colorSchemeMedia.matches ? 'dark' : 'light');
-  applyTheme(initialTheme, false);
+  const initial = document.documentElement.dataset.theme || (lightMedia && lightMedia.matches ? 'light' : 'dark');
+  applyTheme(initial, false);
 
   themeButtons.forEach((button) => {
     button.addEventListener('click', () => applyTheme(button.dataset.themeSet, true));
   });
 
-  if (colorSchemeMedia && typeof colorSchemeMedia.addEventListener === 'function') {
-    colorSchemeMedia.addEventListener('change', (event) => {
+  if (lightMedia && typeof lightMedia.addEventListener === 'function') {
+    lightMedia.addEventListener('change', (event) => {
       try {
-        if (localStorage.getItem(THEME_STORAGE_KEY)) return;
+        if (localStorage.getItem(THEME_KEY)) return;
       } catch {}
-      applyTheme(event.matches ? 'dark' : 'light', false);
+      applyTheme(event.matches ? 'light' : 'dark', false);
     });
   }
 
-  const scenarios = {
-    health: {
-      network: 'Mobile + satellite mix',
-      policy: 'NHS & council procurement',
-      users: 'District nurse handovers',
-      outcome:
-        'Test hybrid cellular-satellite kits with two community nursing teams before commissioning a county-wide rollout.',
-      summary:
-        'Network capability only matters when procurement rules and frontline workflows align around the same test.'
-    },
-    logistics: {
-      network: 'Private 5G vs site Wi-Fi',
-      policy: 'Shared spectrum licensing',
-      users: 'Yard safety & crane comms',
-      outcome:
-        'Validate private cellular on one container berth with shift supervisors before committing to full-port coverage.',
-      summary:
-        'Comparing network performance against real shift handovers shows whether dedicated spectrum pays back.'
-    },
-    rail: {
-      network: 'Trackside fibre & NTN',
-      policy: 'Multi-operator access',
-      users: 'Driver & passenger reliability',
-      outcome:
-        'Agree a neutral-host sharing model across two priority dead-zones before tendering corridor infrastructure.',
-      summary:
-        'Early alignment between route owners and operators prevents expensive infrastructure from sitting underused.'
-    }
-  };
-
-  // Interactive Decision Lens in hero
-  const tabs = document.querySelectorAll('[data-scenario]');
-  const svgNetwork = document.querySelector('[data-svg-network]');
-  const svgPolicy = document.querySelector('[data-svg-policy]');
-  const svgUsers = document.querySelector('[data-svg-users]');
-  const outcomeEl = document.querySelector('[data-scenario-outcome]');
-  const summaryEl = document.querySelector('[data-scenario-summary]');
-
-  function selectScenario(key) {
-    const data = scenarios[key];
-    if (!data) return;
-
-    tabs.forEach((tab) => {
-      tab.setAttribute('aria-selected', String(tab.dataset.scenario === key));
-    });
-
-    if (svgNetwork) svgNetwork.textContent = data.network;
-    if (svgPolicy) svgPolicy.textContent = data.policy;
-    if (svgUsers) svgUsers.textContent = data.users;
-    if (outcomeEl) outcomeEl.textContent = data.outcome;
-    if (summaryEl) summaryEl.textContent = data.summary;
-  }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => selectScenario(tab.dataset.scenario));
-  });
-
-  // Mobile navigation toggle
+  // Mobile menu
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const siteNav = document.querySelector('[data-site-nav]');
 
   if (menuToggle && siteNav) {
     menuToggle.addEventListener('click', () => {
-      const isOpen = siteNav.classList.toggle('is-open');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      const open = siteNav.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', String(open));
     });
 
     siteNav.querySelectorAll('a').forEach((link) => {
@@ -122,30 +66,89 @@
     });
   }
 
-  // Perspectives briefing dialogs
-  document.querySelectorAll('[data-open-dialog]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const dialog = document.getElementById(button.dataset.openDialog);
-      if (dialog && typeof dialog.showModal === 'function') {
-        dialog.showModal();
-      }
+  // Sticky split-rail chapter sync
+  const chapters = document.querySelectorAll('[data-chapter-id]');
+  const railChapter = document.querySelector('[data-rail-chapter]');
+  const railTitle = document.querySelector('[data-rail-title]');
+  const railSummary = document.querySelector('[data-rail-summary]');
+  const railLinks = document.querySelectorAll('[data-rail-link]');
+
+  if (chapters.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (!visible) return;
+        const el = visible.target;
+        const id = el.dataset.chapterId;
+
+        if (railChapter) railChapter.textContent = el.dataset.chapterLabel || '';
+        if (railTitle) railTitle.textContent = el.dataset.chapterTitle || '';
+        if (railSummary) railSummary.textContent = el.dataset.chapterSummary || '';
+
+        railLinks.forEach((link) => {
+          if (link.dataset.railLink === id) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      },
+      { rootMargin: '-30% 0px -55% 0px', threshold: 0 }
+    );
+
+    chapters.forEach((chapter) => observer.observe(chapter));
+  }
+
+  // Sector Dossier tabs
+  const sectors = {
+    public: {
+      heading: 'Turning digital infrastructure funding into everyday community value.',
+      copy: 'Councils, health trusts and regional programmes carry the mandate for rural coverage, tourism and local growth, yet often lack the internal bridge between telecoms engineering and service delivery.',
+      scenario: 'Combining mobile, fibre and satellite options for rural health, social care or regional transport.',
+      blocker: 'Capital grants fund build-out without securing long-term operational ownership or user take-up.',
+      step: 'A cross-departmental framing workshop to align anchor users, procurement rules and realistic test criteria.'
+    },
+    industrial: {
+      heading: 'Proving private wireless where continuous coverage is operationally critical.',
+      copy: 'Manufacturing sites, ports, agriculture and large campuses face complex physical footprints where standard mobile coverage drops out and Wi-Fi struggles with handover.',
+      scenario: 'Evaluating private 5G, IoT telemetry or hybrid wireless across yards, berths and production lines.',
+      blocker: 'Technical proofs of concept impress engineering teams but stall before winning shift-floor ownership.',
+      step: 'Prioritising one operational bottleneck and defining clear payback criteria before committing to site-wide rollout.'
+    },
+    telecoms: {
+      heading: 'Translating advanced network capability into propositions buyers trust.',
+      copy: 'Operators, neutral hosts and satellite or NTN teams build remarkable networks, yet enterprise and public-sector buyers hesitate when integration effort and business risk go unanswered.',
+      scenario: 'Positioning private networks, neutral-host sharing or non-terrestrial connectivity for new vertical markets.',
+      blocker: 'Technical specifications dominate the pitch while buyer readiness and operational change are left to the customer.',
+      step: 'Adoption research and proposition workshops grounded in how target organisations actually buy and deploy.'
+    }
+  };
+
+  const sectorTabs = document.querySelectorAll('[data-sector]');
+  const sectorHeading = document.querySelector('[data-sector-heading]');
+  const sectorCopy = document.querySelector('[data-sector-copy]');
+  const sectorScenario = document.querySelector('[data-sector-scenario]');
+  const sectorBlocker = document.querySelector('[data-sector-blocker]');
+  const sectorStep = document.querySelector('[data-sector-step]');
+
+  sectorTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const data = sectors[tab.dataset.sector];
+      if (!data) return;
+
+      sectorTabs.forEach((item) => {
+        item.setAttribute('aria-selected', String(item === tab));
+      });
+
+      if (sectorHeading) sectorHeading.textContent = data.heading;
+      if (sectorCopy) sectorCopy.textContent = data.copy;
+      if (sectorScenario) sectorScenario.textContent = data.scenario;
+      if (sectorBlocker) sectorBlocker.textContent = data.blocker;
+      if (sectorStep) sectorStep.textContent = data.step;
     });
   });
 
-  document.querySelectorAll('[data-close-dialog]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const dialog = button.closest('dialog');
-      if (dialog) dialog.close();
-    });
-  });
-
-  document.querySelectorAll('dialog.briefing-dialog').forEach((dialog) => {
-    dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) dialog.close();
-    });
-  });
-
-  // Conversation starter brief builder
+  // Conversation brief composer
   const briefForm = document.querySelector('[data-brief-form]');
   const draftOutput = document.querySelector('[data-draft-output]');
   const copyButton = document.querySelector('[data-copy-draft]');
@@ -154,8 +157,8 @@
   function updateDraft() {
     if (!briefForm || !draftOutput) return;
     const formData = new FormData(briefForm);
-    const sector = (formData.get('sector') || 'Public sector').toString().toLowerCase();
-    const stage = (formData.get('stage') || 'exploring where emerging connectivity could help').toString().toLowerCase();
+    const sector = (formData.get('sector') || 'UK public sector').toString();
+    const stage = (formData.get('stage') || 'exploring where emerging connectivity can solve a real problem').toString();
 
     draftOutput.textContent =
       `We are a ${sector} team ${stage}. We would like to discuss how to align network evidence, policy constraints and user needs before deciding what to test.`;
